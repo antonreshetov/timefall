@@ -6,6 +6,6 @@ useDark()
 
 <template>
   <div class="h-screen">
-    App
+    <RouterView />
   </div>
 </template>
