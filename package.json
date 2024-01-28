@@ -19,6 +19,7 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
+    "@vueuse/core": "^10.7.2",
     "electron-squirrel-startup": "^1.0.0",
     "vue": "^3.4.15"
   },
@@ -36,13 +37,16 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "@vitejs/plugin-vue": "^5.0.3",
+    "autoprefixer": "^10.4.17",
     "bumpp": "^9.3.0",
     "electron": "28.2.0",
     "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.25.0",
     "lint-staged": "^15.2.0",
+    "postcss": "^8.4.33",
     "prettier": "^3.2.4",
     "simple-git-hooks": "^2.9.0",
+    "tailwindcss": "^3.4.1",
     "ts-node": "^10.0.0",
     "typescript": "^5.3.3"
   },
