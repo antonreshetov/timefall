@@ -1,0 +1,59 @@
+{
+  "name": "timefall",
+  "productName": "Timefall",
+  "version": "0.0.0",
+  "description": "Time tracking app",
+  "author": {
+    "name": "Anton Reshetov",
+    "email": "reshetov.art@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [],
+  "main": ".vite/build/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint .",
+    "prepare": "simple-git-hooks"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "vue": "^3.4.15"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.3",
+    "@commitlint/cli": "^18.6.0",
+    "@commitlint/config-conventional": "^18.6.0",
+    "@electron-forge/cli": "^7.2.0",
+    "@electron-forge/maker-deb": "^7.2.0",
+    "@electron-forge/maker-rpm": "^7.2.0",
+    "@electron-forge/maker-squirrel": "^7.2.0",
+    "@electron-forge/maker-zip": "^7.2.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
+    "@electron-forge/plugin-vite": "^7.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "@vitejs/plugin-vue": "^5.0.3",
+    "bumpp": "^9.3.0",
+    "electron": "28.2.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-import": "^2.25.0",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.2.4",
+    "simple-git-hooks": "^2.9.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^5.3.3"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "bunx lint-staged",
+    "commit-msg": "bunx commitlint --edit $1"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
+}
