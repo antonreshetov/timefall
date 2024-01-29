@@ -11,7 +11,7 @@
   "keywords": [],
   "main": ".vite/build/main.js",
   "scripts": {
-    "start": "electron-forge start",
+    "dev": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
@@ -49,7 +49,8 @@
     "simple-git-hooks": "^2.9.0",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.0.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "unplugin-vue-components": "^0.26.0"
   },
   "simple-git-hooks": {
     "pre-commit": "bunx lint-staged",
