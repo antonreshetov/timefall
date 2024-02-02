@@ -8,3 +8,8 @@
     @apply text-neutral-800 dark:text-neutral-300 bg-white dark:bg-neutral-900;
   }
 }
+
+:root {
+  --sidebar-width: 200px;
+  --tasks-width: 200px;
+}
