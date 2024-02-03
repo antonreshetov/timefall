@@ -13,6 +13,8 @@ export default defineConfig({
       dirs: [`${pathSrc}/components`],
       extensions: ['vue'],
       dts: true,
+      directoryAsNamespace: true,
+      collapseSamePrefixes: true,
     }),
   ],
   resolve: {
