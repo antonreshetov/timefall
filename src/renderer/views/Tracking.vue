@@ -1,5 +1,6 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>tracking</div>
+  <Tasks />
+  <TrackingList />
 </template>
