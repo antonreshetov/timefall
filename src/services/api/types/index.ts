@@ -52,6 +52,7 @@ export interface TaskApi {
   addTaskItem: (item: Pick<TaskItem, 'taskId'>) => string
   getTaskItems: () => TaskItemWithInfo[]
   getTasks: () => TaskWithItems[]
+  updateTask: (id: string, task: Partial<Omit<Task, 'id'>>) => void
   updateTaskItem: (id: string, item: Partial<Omit<TaskItem, 'id'>>) => void
 }
 

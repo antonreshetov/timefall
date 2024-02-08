@@ -108,4 +108,20 @@ export const api: TaskApi = {
 
     store.set('tasksItems', items)
   },
+
+  updateTask(id, task) {
+    const tasks = store.get('tasks') as Task[]
+    const index = tasks.findIndex(t => t.id === id)
+
+    if (!index)
+      return
+
+    tasks[index] = {
+      ...tasks[index],
+      ...task,
+      updatedAt: new Date().getTime(),
+    }
+
+    store.set('tasks', tasks)
+  },
 }
