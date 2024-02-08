@@ -4,6 +4,10 @@
     "baseUrl": ".",
     "module": "commonjs",
     "moduleResolution": "node",
+    "paths": {
+      "@/*": ["src/renderer/*"],
+      "~/*": ["src/*"]
+    },
     "resolveJsonModule": true,
     "allowJs": true,
     "noImplicitAny": true,

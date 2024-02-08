@@ -1,6 +1,9 @@
 /* eslint-disable node/prefer-global/process */
 import path from 'node:path'
 import { BrowserWindow, app } from 'electron'
+import { store } from './services/store'
+
+store.app.set('bound', {})
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 // eslint-disable-next-line ts/no-require-imports
