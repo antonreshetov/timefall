@@ -9,6 +9,6 @@ export default new Store({
   defaults: {
     folders: [],
     tasks: [],
-    tasksItems: [],
+    taskRecords: [],
   },
 })

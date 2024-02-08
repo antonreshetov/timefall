@@ -1,6 +1,12 @@
 import { nanoid } from 'nanoid'
 import store from '../store/db'
-import type { Folder, Task, TaskApi, TaskItem, TaskWithItems } from './types'
+import type {
+  Folder,
+  Task,
+  TaskApi,
+  TaskRecord,
+  TaskWithRecords,
+} from './types'
 
 export const api: TaskApi = {
   addTask(task) {
@@ -21,7 +27,7 @@ export const api: TaskApi = {
     newTask.folderId = task.folderId
     newTask.hourRate = 0
     newTask.id = id
-    newTask.itemIds = []
+    newTask.recordIds = []
     newTask.updatedAt = null
 
     tasks.push(newTask)
@@ -30,13 +36,13 @@ export const api: TaskApi = {
     store.set('folders', folders)
   },
 
-  addTaskItem(item) {
+  addTaskRecord(item) {
     const id = nanoid(8)
 
-    const items = store.get('tasksItems') as TaskItem[]
+    const items = store.get('taskRecords') as TaskRecord[]
     const tasks = store.get('tasks') as Task[]
 
-    const newTaskItem = JSON.parse(JSON.stringify(item)) as TaskItem
+    const newTaskItem = JSON.parse(JSON.stringify(item)) as TaskRecord
 
     newTaskItem.createdAt = new Date().getTime()
     newTaskItem.description = ''
@@ -48,41 +54,41 @@ export const api: TaskApi = {
     items.push(newTaskItem)
 
     const task = tasks.find(t => t.id === item.taskId)
-    task.itemIds.push(id)
+    task.recordIds.push(id)
 
-    store.set('tasksItems', items)
+    store.set('taskRecords', items)
     store.set('tasks', tasks)
 
     return id
   },
 
-  addDurationToTaskItem(id, duration) {
-    const items = store.get('tasksItems') as TaskItem[]
+  updateTaskRecordDuration(id, duration) {
+    const items = store.get('taskRecords') as TaskRecord[]
     const index = items.findIndex(i => i.id === id)
 
     items[index].duration += duration
     items[index].updatedAt = new Date().getTime()
 
-    store.set('tasksItems', items)
+    store.set('taskRecords', items)
   },
 
   getTasks: () => {
-    const tasks = store.get('tasks') as TaskWithItems[]
-    const tasksItems = store.get('tasksItems') as TaskItem[]
+    const tasks = store.get('tasks') as TaskWithRecords[]
+    const taskRecords = store.get('taskRecords') as TaskRecord[]
 
     tasks.forEach((task) => {
-      task.items = tasksItems?.filter(item => item.taskId === task.id)
+      task.records = taskRecords?.filter(item => item.taskId === task.id)
     })
 
     return tasks
   },
 
-  getTaskItems: () => {
+  getTaskRecords: () => {
     const tasks = store.get('tasks') as Task[]
     const folders = store.get('folders') as Folder[]
-    const items = store.get('tasksItems') as TaskItem[]
+    const items = store.get('taskRecords') as TaskRecord[]
 
-    const tasksItems = items.map((item) => {
+    const taskRecords = items.map((item) => {
       const task = tasks.find(t => t.id === item.taskId)
       const folder = folders.find(f => f.id === task.folderId)
 
@@ -93,11 +99,11 @@ export const api: TaskApi = {
       }
     })
 
-    return tasksItems
+    return taskRecords
   },
 
-  updateTaskItem(id, item) {
-    const items = store.get('tasksItems') as TaskItem[]
+  updateTaskRecord(id, item) {
+    const items = store.get('taskRecords') as TaskRecord[]
     const index = items.findIndex(i => i.id === id)
 
     items[index] = {
@@ -106,14 +112,14 @@ export const api: TaskApi = {
       updatedAt: new Date().getTime(),
     }
 
-    store.set('tasksItems', items)
+    store.set('taskRecords', items)
   },
 
   updateTask(id, task) {
     const tasks = store.get('tasks') as Task[]
     const index = tasks.findIndex(t => t.id === id)
 
-    if (!index)
+    if (index === -1)
       return
 
     tasks[index] = {

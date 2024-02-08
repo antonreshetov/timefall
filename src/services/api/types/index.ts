@@ -14,7 +14,7 @@ export interface FolderWithTasks extends Folder {
 export interface Task {
   id: string
   name: string
-  itemIds: string[]
+  recordIds: string[]
   hourRate: number
   description: string
   folderId: string
@@ -22,11 +22,11 @@ export interface Task {
   updatedAt?: number
 }
 
-export interface TaskWithItems extends Task {
-  items: TaskItem[]
+export interface TaskWithRecords extends Task {
+  records: TaskRecord[]
 }
 
-export interface TaskItem {
+export interface TaskRecord {
   id: string
   duration: number
   hourRate: number
@@ -36,7 +36,7 @@ export interface TaskItem {
   updatedAt?: number
 }
 
-export interface TaskItemWithInfo extends TaskItem {
+export interface TaskRecordWithInfo extends TaskRecord {
   taskName?: string
   folderName?: string
 }
@@ -47,13 +47,13 @@ export interface FolderApi {
 }
 
 export interface TaskApi {
-  addDurationToTaskItem: (id: string, duration: number) => void
   addTask: (task: Pick<Task, 'name' | 'folderId'>) => void
-  addTaskItem: (item: Pick<TaskItem, 'taskId'>) => string
-  getTaskItems: () => TaskItemWithInfo[]
-  getTasks: () => TaskWithItems[]
+  addTaskRecord: (item: Pick<TaskRecord, 'taskId'>) => string
+  getTaskRecords: () => TaskRecordWithInfo[]
+  getTasks: () => TaskWithRecords[]
   updateTask: (id: string, task: Partial<Omit<Task, 'id'>>) => void
-  updateTaskItem: (id: string, item: Partial<Omit<TaskItem, 'id'>>) => void
+  updateTaskRecord: (id: string, item: Partial<Omit<TaskRecord, 'id'>>) => void
+  updateTaskRecordDuration: (id: string, duration: number) => void
 }
 
 export type Api = FolderApi & TaskApi
