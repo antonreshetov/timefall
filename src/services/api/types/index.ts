@@ -55,4 +55,4 @@ export interface TaskApi {
   updateTaskItem: (id: string, item: Partial<Omit<TaskItem, 'id'>>) => void
 }
 
-export type Api = FolderApi | TaskApi
+export type Api = FolderApi & TaskApi
