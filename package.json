@@ -65,5 +65,8 @@
       "prettier --write",
       "eslint --fix"
     ]
+  },
+  "volta": {
+    "node": "20.11.0"
   }
 }
