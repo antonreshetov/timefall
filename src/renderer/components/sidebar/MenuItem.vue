@@ -12,7 +12,8 @@ defineProps<Props>()
 <template>
   <RouterLink
     :to="to"
-    class="block rounded"
+    class="block rounded cursor-default"
+    data-menu-item
   >
     <div class="px-3 py-2 flex items-center gap-2">
       <component

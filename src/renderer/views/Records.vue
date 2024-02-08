@@ -2,5 +2,5 @@
 
 <template>
   <Tasks />
-  <TrackingList />
+  <RecordsList />
 </template>
