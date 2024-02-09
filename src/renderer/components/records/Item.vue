@@ -15,7 +15,7 @@ defineProps<Props>()
     data-tracking-item
     class="grid grid-cols-[60px_1fr_100px] px-4 py-2 border-b border-neutral-200 dark:border-neutral-700 last:border-none"
   >
-    <div class="text-xs">
+    <div class="flex flex-col justify-between text-xs leading-normal">
       <div>
         <span v-if="!data.updatedAt"> now </span>
         <span v-else>
@@ -26,7 +26,7 @@ defineProps<Props>()
         {{ format(data.createdAt, "HH:mm") }}
       </div>
     </div>
-    <div class="">
+    <div class="flex flex-col justify-center leading-normal">
       <div
         class="text-[10px] uppercase text-neutral-400 dark:text-neutral-500 font-bold"
       >
