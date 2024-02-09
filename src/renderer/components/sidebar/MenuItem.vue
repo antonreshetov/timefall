@@ -28,6 +28,6 @@ defineProps<Props>()
 
 <style>
 .router-link-active {
-  @apply bg-neutral-300 dark:bg-neutral-700 dark:text-white;
+  @apply bg-neutral-200 dark:bg-neutral-700 dark:text-white;
 }
 </style>

@@ -23,19 +23,23 @@ const isStarted = computed(() => currentTaskId.value === props.id)
     class="flex items-center gap-2 py-2"
   >
     <div class="flex items-center gap-2 flex-grow">
-      <Play
-        v-if="!isStarted"
-        class="w-4 h-4"
-        @click="start(id)"
-      />
-      <Pause
-        v-else
-        class="w-4 h-4"
-        @click="stop"
-      />
-      {{ name }}
+      <div class="flex-shrink-0">
+        <Play
+          v-if="!isStarted"
+          class="w-4 h-4"
+          @click="start(id)"
+        />
+        <Pause
+          v-else
+          class="w-4 h-4"
+          @click="stop"
+        />
+      </div>
+      <div class="text-ellipsis overflow-hidden line-clamp-1">
+        {{ name }}
+      </div>
     </div>
-    <div class="tabular-nums">
+    <div class="tabular-nums flex-shrink-0">
       {{ timeFormat(isStarted ? duration + sec : duration, isStarted) }}
     </div>
   </div>

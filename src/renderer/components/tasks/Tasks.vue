@@ -14,7 +14,7 @@ function taskTotalDuration(items: TaskRecord[] = []) {
 
 <template>
   <div
-    class="overflow-auto relative border-r border-neutral-200 dark:border-neutral-800"
+    class="overflow-auto relative border-r border-neutral-200 dark:border-neutral-800 select-none"
   >
     <UiTopbar>
       <div class="px-4 text-sm flex justify-end flex-grow gap-2">

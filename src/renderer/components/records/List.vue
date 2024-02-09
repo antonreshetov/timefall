@@ -9,7 +9,7 @@ getTaskRecords()
 <template>
   <div
     data-tracking-list
-    class="overflow-auto"
+    class="overflow-auto select-none"
   >
     <UiTopbar>
       <div class="flex justify-between w-full px-4 text-sm">

@@ -8,15 +8,15 @@ const { lastTask, start, stop, isStarted, timeFormatted } = useTasks()
 <template>
   <div
     data-sidebar
-    class="flex flex-col px-2 pb-2 bg-neutral-100 dark:bg-neutral-800"
+    class="flex flex-col px-2 pb-2 bg-neutral-100 dark:bg-neutral-800 select-none"
   >
     <UiTopbar class="bg-neutral-100 dark:bg-neutral-800" />
     <SidebarMenu class="flex-grow" />
     <div
       v-if="lastTask"
-      class="flex items-center gap-2 bg-neutral-300 dark:bg-neutral-700 rounded px-2 py-1 text-white"
+      class="flex items-center gap-2 bg-white dark:bg-neutral-700 rounded px-2 py-1 dark:text-white"
     >
-      <div class="flex justify-center w-[25px]">
+      <div class="flex justify-center w-[25px] flex-shrink-0">
         <Play
           v-if="!isStarted"
           class="w-5 h-5"
@@ -29,8 +29,10 @@ const { lastTask, start, stop, isStarted, timeFormatted } = useTasks()
         />
       </div>
       <div>
-        <div>{{ timeFormatted }}</div>
-        <div>
+        <div class="font-bold">
+          {{ timeFormatted }}
+        </div>
+        <div class="text-ellipsis overflow-hidden line-clamp-1">
           {{ lastTask.name }}
         </div>
       </div>
