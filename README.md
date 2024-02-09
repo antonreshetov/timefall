@@ -17,6 +17,10 @@
 
 The Timefall project is an open-source software that is being developed to provide users with an efficient and convenient time management tool. Created with modern software trends in mind, Timefall is a tool accessible to anyone who wants to better understand how they allocate their time and how it can be used most productively. It's a simple yet powerful tool capable of adapting to each user's needs.
 
+## How can I help?
+
+Now a good help would be your recognition and star for the project to gain visibility on GitHub.
+
 ## License
 
 [AGPL-3.0](https://github.com/antonreshetov/timefall/blob/master/LICENSE)
