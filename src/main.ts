@@ -1,6 +1,6 @@
 /* eslint-disable node/prefer-global/process */
 import path from 'node:path'
-import { BrowserWindow, app } from 'electron'
+import { BrowserWindow, app, nativeTheme } from 'electron'
 import { store } from './services/store'
 
 let mainWindow: BrowserWindow
@@ -16,6 +16,7 @@ function createWindow() {
     width: 900,
     height: 600,
     minWidth: 900,
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#181818' : '#fff',
     ...bounds,
     titleBarStyle: 'hidden',
     webPreferences: {
