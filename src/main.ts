@@ -3,7 +3,7 @@ import path from 'node:path'
 import { BrowserWindow, app } from 'electron'
 import { store } from './services/store'
 
-store.app.set('bound', {})
+let mainWindow: BrowserWindow
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 // eslint-disable-next-line ts/no-require-imports
@@ -11,11 +11,16 @@ if (require('electron-squirrel-startup'))
   app.quit()
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
-    width: 800,
+  const bounds = store.app.get('bounds')
+  mainWindow = new BrowserWindow({
+    width: 900,
     height: 600,
+    minWidth: 900,
+    ...bounds,
+    titleBarStyle: 'hidden',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
     },
   })
 
@@ -29,6 +34,10 @@ function createWindow() {
   }
 
   mainWindow.webContents.openDevTools()
+
+  mainWindow.on('move', () => store.app.set('bounds', mainWindow.getBounds()))
+  mainWindow.on('resize', () =>
+    store.app.set('bounds', mainWindow.getBounds()))
 }
 
 app.on('ready', createWindow)

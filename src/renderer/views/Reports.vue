@@ -1,5 +1,14 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>reports</div>
+  <div>
+    <UiTopbar>
+      <div class="px-4 text-sm">
+        <!--  -->
+      </div>
+    </UiTopbar>
+    <div class="px-4">
+      Not implemented yet
+    </div>
+  </div>
 </template>
