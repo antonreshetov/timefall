@@ -1,14 +1,36 @@
 <script setup lang="ts">
 import { Pause, Play } from 'lucide-vue-next'
+import { ref, watchEffect } from 'vue'
 import { useTasks } from '@/components/tasks/composables'
+import { useApp, useGutter } from '@/composables'
+import { APP_DEFAULTS } from '~/services/store/constants'
+
+const { store } = window.electron
 
 const { lastTask, start, stop, isStarted, timeFormatted } = useTasks()
+
+const sidebarRef = ref<HTMLElement>()
+const gutterRef = ref<{ $el: HTMLElement }>()
+
+const { sidebarWidth } = useApp()
+const { width } = useGutter(
+  sidebarRef,
+  gutterRef,
+  Number.parseInt(sidebarWidth.value),
+  APP_DEFAULTS.sizes.sidebar,
+)
+
+watchEffect(() => {
+  sidebarWidth.value = `${width.value}px`
+  store.app.set('sizes.sidebar', width.value)
+})
 </script>
 
 <template>
   <div
+    ref="sidebarRef"
     data-sidebar
-    class="flex flex-col px-2 pb-2 bg-neutral-100 dark:bg-neutral-800 select-none"
+    class="flex flex-col px-2 pb-2 bg-neutral-100 dark:bg-neutral-800 select-none relative"
   >
     <UiTopbar class="bg-neutral-100 dark:bg-neutral-800" />
     <SidebarMenu class="flex-grow" />
@@ -37,5 +59,6 @@ const { lastTask, start, stop, isStarted, timeFormatted } = useTasks()
         </div>
       </div>
     </div>
+    <UiGutter ref="gutterRef" />
   </div>
 </template>
