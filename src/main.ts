@@ -3,6 +3,8 @@ import path from 'node:path'
 import { BrowserWindow, app, nativeTheme } from 'electron'
 import { store } from './services/store'
 
+const isDev = process.env.NODE_ENV === 'development'
+
 let mainWindow: BrowserWindow
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -34,7 +36,8 @@ function createWindow() {
     )
   }
 
-  mainWindow.webContents.openDevTools()
+  if (isDev)
+    mainWindow.webContents.openDevTools()
 
   mainWindow.on('move', () => store.app.set('bounds', mainWindow.getBounds()))
   mainWindow.on('resize', () =>
