@@ -10,6 +10,16 @@
   Inspired by Timemator.
 </p>
 
+<p align="center">
+  <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/antonreshetov/timefall">
+  <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/antonreshetov/timefall/total">
+  <img alt="GitHub" src="https://img.shields.io/github/license/antonreshetov/timefall">
+</p>
+
+<p align="center">
+  <a href="https://github.com/antonreshetov/timefall/releases">Latest Release</a>
+</p>
+
 > [!CAUTION]
 > Project is currently in an active development stage.
 
