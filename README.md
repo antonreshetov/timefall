@@ -17,11 +17,13 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/antonreshetov/timefall/releases">Latest Release</a>
+  <a href="https://github.com/antonreshetov/timefall/releases">Latest Release</a> |
+  <a href="https://github.com/antonreshetov/timefall/discussions">Discussions</a>
 </p>
 
 > [!CAUTION]
 > Project is currently in an active development stage.
+> We strongly recommend using our app for familiarization purposes only at this time. This will allow you to get acquainted with the main features and capabilities of our project, without risking the occurrence of unexpected situations.
 
 ## About
 
