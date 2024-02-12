@@ -40,6 +40,8 @@ export const api: TaskApi = {
 
     store.set('tasks', tasks)
     store.set('folders', folders)
+
+    return id
   },
 
   addTaskRecord(item) {
