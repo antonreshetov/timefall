@@ -49,7 +49,7 @@ export interface FolderApi {
 }
 
 export interface TaskApi {
-  addTask: (task: Pick<Task, 'name' | 'folderId'>) => void
+  addTask: (task: Pick<Task, 'name' | 'folderId'>) => string
   addTaskRecord: (item: Pick<TaskRecord, 'taskId'>) => string
   getTaskRecords: () => TaskRecordWithInfo[]
   getTasks: () => TaskWithRecords[]

@@ -1,0 +1,167 @@
+{
+  "folders": [],
+  "tasks": [
+    {
+      "name": "Side Project",
+      "folderId": "",
+      "createdAt": 1707710677061,
+      "description": "",
+      "hourRate": 0,
+      "id": "cIUAzGSi",
+      "recordIds": [
+        "NCtBkJ4I"
+      ],
+      "updatedAt": null,
+      "color": "#ff8e00"
+    },
+    {
+      "name": "Learning Vue",
+      "folderId": "",
+      "createdAt": 1707710677062,
+      "description": "",
+      "hourRate": 0,
+      "id": "dtmgXt95",
+      "recordIds": [
+        "HT1jydwL",
+        "FeHNSn_k",
+        "Luc1Io7L"
+      ],
+      "updatedAt": null,
+      "color": "#00c1f6"
+    },
+    {
+      "name": "Email Marketing",
+      "folderId": "",
+      "createdAt": 1707710677063,
+      "description": "",
+      "hourRate": 0,
+      "id": "47cqQpnx",
+      "recordIds": [
+        "LkgLIpS0",
+        "1u6o5Gf4"
+      ],
+      "updatedAt": null,
+      "color": "#00db28"
+    },
+    {
+      "name": "Logo Design",
+      "folderId": "",
+      "createdAt": 1707710677063,
+      "description": "",
+      "hourRate": 0,
+      "id": "X54__fJ-",
+      "recordIds": [
+        "VlsteJcR",
+        "mqiG0rW_"
+      ],
+      "updatedAt": null,
+      "color": "#c23ff2"
+    },
+    {
+      "name": "Personal Blog",
+      "folderId": "",
+      "createdAt": 1707710677064,
+      "description": "",
+      "hourRate": 0,
+      "id": "GBL-n6EH",
+      "recordIds": [
+        "tEgcd7We",
+        "92B-YvCK"
+      ],
+      "updatedAt": null,
+      "color": "#0094ff"
+    }
+  ],
+  "taskRecords": [
+    {
+      "taskId": "X54__fJ-",
+      "createdAt": 1707710677064,
+      "description": "",
+      "duration": 1246,
+      "hourRate": 0,
+      "id": "VlsteJcR",
+      "updatedAt": 1707710677065
+    },
+    {
+      "taskId": "GBL-n6EH",
+      "createdAt": 1707710677065,
+      "description": "",
+      "duration": 8673,
+      "hourRate": 0,
+      "id": "tEgcd7We",
+      "updatedAt": 1707710677066
+    },
+    {
+      "taskId": "X54__fJ-",
+      "createdAt": 1707710677066,
+      "description": "",
+      "duration": 9117,
+      "hourRate": 0,
+      "id": "mqiG0rW_",
+      "updatedAt": 1707710677067
+    },
+    {
+      "taskId": "47cqQpnx",
+      "createdAt": 1707710677067,
+      "description": "",
+      "duration": 4448,
+      "hourRate": 0,
+      "id": "LkgLIpS0",
+      "updatedAt": 1707710677067
+    },
+    {
+      "taskId": "dtmgXt95",
+      "createdAt": 1707710677068,
+      "description": "",
+      "duration": 2393,
+      "hourRate": 0,
+      "id": "HT1jydwL",
+      "updatedAt": 1707710677068
+    },
+    {
+      "taskId": "dtmgXt95",
+      "createdAt": 1707710677068,
+      "description": "",
+      "duration": 546,
+      "hourRate": 0,
+      "id": "FeHNSn_k",
+      "updatedAt": 1707710677069
+    },
+    {
+      "taskId": "dtmgXt95",
+      "createdAt": 1707710677069,
+      "description": "",
+      "duration": 2278,
+      "hourRate": 0,
+      "id": "Luc1Io7L",
+      "updatedAt": 1707710677069
+    },
+    {
+      "taskId": "cIUAzGSi",
+      "createdAt": 1707710677069,
+      "description": "",
+      "duration": 428,
+      "hourRate": 0,
+      "id": "NCtBkJ4I",
+      "updatedAt": 1707710677070
+    },
+    {
+      "taskId": "GBL-n6EH",
+      "createdAt": 1707710677070,
+      "description": "",
+      "duration": 2562,
+      "hourRate": 0,
+      "id": "92B-YvCK",
+      "updatedAt": 1707710677071
+    },
+    {
+      "taskId": "47cqQpnx",
+      "createdAt": 1707710677071,
+      "description": "",
+      "duration": 4324,
+      "hourRate": 0,
+      "id": "1u6o5Gf4",
+      "updatedAt": 1707710677071
+    }
+  ]
+}

@@ -12,6 +12,7 @@
   "main": ".vite/build/main.js",
   "scripts": {
     "dev": "electron-forge start",
+    "fixtures:seed": "bun ./src/services/api/fixtures/index.ts",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
