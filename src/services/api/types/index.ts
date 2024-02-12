@@ -20,6 +20,7 @@ export interface Task {
   folderId: string
   createdAt: number
   updatedAt?: number
+  color?: string
 }
 
 export interface TaskWithRecords extends Task {
@@ -39,6 +40,7 @@ export interface TaskRecord {
 export interface TaskRecordWithInfo extends TaskRecord {
   taskName?: string
   folderName?: string
+  color?: string
 }
 
 export interface FolderApi {

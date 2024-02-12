@@ -21,9 +21,9 @@ const totalDuration = computed(() => {
 <template>
   <div data-tracking-group>
     <div
-      class="sticky top-[50px] bg-white dark:bg-neutral-900 py-2 text-2xl border-b border-neutral-200 dark:border-neutral-700"
+      class="sticky top-[50px] bg-white dark:bg-neutral-900 py-2 text-2xl border-b border-neutral-200 dark:border-neutral-700 z-10"
     >
-      <div class="grid grid-cols-[250px_1fr_1fr] px-4 text-lg gap-2">
+      <div class="grid grid-cols-[3fr_1fr_120px] px-4 text-lg gap-2">
         <div class="font-bold">
           {{ date }}
         </div>

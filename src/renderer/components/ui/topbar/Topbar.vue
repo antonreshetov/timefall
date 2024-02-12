@@ -13,7 +13,7 @@ const props = defineProps<Props>()
     data-ui-topbar
     :class="
       cn(
-        'h-[var(--topbar-height)] sticky top-0 z-10 dark:bg-neutral-900 bg-white w-full flex items-center',
+        'h-[var(--topbar-height)] sticky top-0 z-50 dark:bg-neutral-900 bg-white w-full flex items-center',
         props.class,
       )
     "

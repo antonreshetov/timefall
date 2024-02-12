@@ -42,6 +42,7 @@ watchEffect(() => {
         <Play
           v-if="!isStarted"
           class="w-5 h-5"
+          :style="{ color: lastTask.color }"
           @click="start(lastTask.id)"
         />
         <Pause
