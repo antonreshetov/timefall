@@ -7,6 +7,11 @@ import type {
   TaskRecord,
   TaskWithRecords,
 } from './types'
+import { COLORS } from './constants'
+
+function getRandomColor() {
+  return COLORS[Math.floor(Math.random() * COLORS.length)]
+}
 
 export const api: TaskApi = {
   addTask(task) {
@@ -29,6 +34,7 @@ export const api: TaskApi = {
     newTask.id = id
     newTask.recordIds = []
     newTask.updatedAt = null
+    newTask.color = getRandomColor()
 
     tasks.push(newTask)
 
@@ -96,6 +102,7 @@ export const api: TaskApi = {
         ...item,
         taskName: task?.name,
         folderName: folder?.name,
+        color: task?.color,
       }
     })
 

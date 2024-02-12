@@ -59,8 +59,8 @@ function taskTotalDuration(items: TaskRecord[] = []) {
         v-for="i in tasks"
         :id="i.id"
         :key="i.id"
-        class="px-4"
         :name="i.name"
+        :color="i.color"
         :duration="taskTotalDuration(i.records)"
       />
     </div>
