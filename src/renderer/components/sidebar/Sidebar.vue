@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { Pause, Play } from 'lucide-vue-next'
 import { ref, watchEffect } from 'vue'
 import { useTasks } from '@/components/tasks/composables'
 import { useApp, useGutter } from '@/composables'
 import { APP_DEFAULTS } from '~/services/store/constants'
+import SolarPlayBold from '~icons/solar/play-bold'
+import SolarPauseBold from '~icons/solar/pause-bold'
 
 const { store } = window.electron
 
@@ -39,13 +40,13 @@ watchEffect(() => {
       class="flex items-center gap-2 bg-white dark:bg-neutral-700 rounded px-2 py-1 dark:text-white"
     >
       <div class="flex justify-center w-[25px] flex-shrink-0">
-        <Play
+        <SolarPlayBold
           v-if="!isStarted"
           class="w-5 h-5"
           :style="{ color: lastTask.color }"
           @click="start(lastTask.id)"
         />
-        <Pause
+        <SolarPauseBold
           v-else
           class="w-4 h-4"
           @click="stop"

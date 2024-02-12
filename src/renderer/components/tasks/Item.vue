@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Pause, Play } from 'lucide-vue-next'
 import { computed } from 'vue'
 import chroma from 'chroma-js'
 import { usePreferredDark } from '@vueuse/core'
+import SolarPlayBold from '~icons/solar/play-bold'
+import SolarPauseBold from '~icons/solar/pause-bold'
 
 import { useTasks } from '@/components/tasks/composables'
 import { timeFormat } from '@/utils'
@@ -62,12 +63,12 @@ const actionStyles = computed(() => {
         class="flex-shrink-0 p-2 relative"
         @click="onClick"
       >
-        <Play
+        <SolarPlayBold
           v-if="!isStarted"
           class="w-4 h-4 relative z-10"
           :style="{ color }"
         />
-        <Pause
+        <SolarPauseBold
           v-else
           class="w-4 h-4 relative text-white1 z-1"
         />

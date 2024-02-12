@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { BarChartBig, PlaySquare } from 'lucide-vue-next'
+import SolarStopwatchPlayBold from '~icons/solar/stopwatch-play-bold'
+import SolarAlignBottomBold from '~icons/solar/align-bottom-bold'
 </script>
 
 <template>
   <div data-menu>
     <SidebarMenuItem
       to="/"
-      :icon="PlaySquare"
+      :icon="SolarStopwatchPlayBold"
     >
       Tracking
     </SidebarMenuItem>
     <SidebarMenuItem
       to="/reports"
-      :icon="BarChartBig"
+      :icon="SolarAlignBottomBold"
     >
       Reports
     </SidebarMenuItem>
