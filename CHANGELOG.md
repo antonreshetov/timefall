@@ -1,3 +1,13 @@
+# [0.2.0](https://github.com/antonreshetov/timefall/compare/v0.1.0...v0.2.0) (2024-02-12)
+
+
+### Features
+
+* add task color ([8b4d741](https://github.com/antonreshetov/timefall/commit/8b4d741762db66e196bd3bbb00b74c4afbf84815))
+* new icons ([cff1469](https://github.com/antonreshetov/timefall/commit/cff146952e18ae4ab285053f2ddd5ad7516e9c76))
+
+
+
 # [0.1.0](https://github.com/antonreshetov/timefall/compare/0347fd4547b748e1f033beb1246f01546dedbab3...v0.1.0) (2024-02-10)
 
 
