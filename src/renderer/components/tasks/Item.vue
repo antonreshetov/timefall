@@ -70,7 +70,7 @@ const actionStyles = computed(() => {
         />
         <SolarPauseBold
           v-else
-          class="w-4 h-4 relative text-white1 z-1"
+          class="w-4 h-4 relative text-white1 z-10"
         />
         <div
           class="absolute top-0 left-0 h-full w-full bg-red-300 _opacity-20 rounded-full"
