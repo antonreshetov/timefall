@@ -1,3 +1,13 @@
+# [0.3.0](https://github.com/antonreshetov/timefall/compare/v0.2.0...v0.3.0) (2024-02-15)
+
+
+### Features
+
+* add edit task & records ([#8](https://github.com/antonreshetov/timefall/issues/8)) ([2beb049](https://github.com/antonreshetov/timefall/commit/2beb049e73fa318c69dc4bacb74805b2abb83dea))
+* add new task from context menu ([b563864](https://github.com/antonreshetov/timefall/commit/b5638648b9090dbc041f58b0acdf3b4e8a7cd6a5))
+
+
+
 # [0.2.0](https://github.com/antonreshetov/timefall/compare/v0.1.0...v0.2.0) (2024-02-12)
 
 
