@@ -33,6 +33,7 @@
     "interactjs": "^1.10.26",
     "lucide-vue-next": "^0.321.0",
     "nanoid": "^5.0.5",
+    "radix-vue": "^1.4.4",
     "tailwind-merge": "^2.2.1",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
