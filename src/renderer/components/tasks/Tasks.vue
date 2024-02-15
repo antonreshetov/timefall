@@ -109,6 +109,10 @@ function onDelete() {
           />
         </ContextMenu.Trigger>
         <ContextMenu.Content>
+          <ContextMenu.Item @click="onAddTask">
+            New Task
+          </ContextMenu.Item>
+          <ContextMenu.Separator />
           <ContextMenu.Item @click="isOpenEditMenu = true">
             Edit...
           </ContextMenu.Item>
