@@ -11,11 +11,22 @@ const tasks = shallowRef<TaskWithRecords[]>([])
 const sec = ref(0)
 const currentTaskId = ref<string>()
 const currentTaskItemId = ref<string>()
+const editTaskId = ref<string>()
 const lastTaskId = ref<string>()
+const contextTaskId = ref<string>()
 const isStarted = ref(false)
+const isOpenEditMenu = ref(false)
+
+const currentTask = computed(() => {
+  return tasks.value.find(t => t.id === currentTaskId.value)
+})
 
 const lastTask = computed(() => {
   return tasks.value.find(t => t.id === lastTaskId.value)
+})
+
+const editTask = computed(() => {
+  return tasks.value.find(t => t.id === editTaskId.value)
 })
 
 const timeFormatted = computed(() => {
@@ -63,13 +74,24 @@ function addTaskFolder() {
   getTasks()
 }
 
+function deleteTask(id: string) {
+  api.deleteTask(id)
+  getTasks()
+}
+
 export function useTasks() {
   return {
     addTask,
     addTaskFolder,
+    contextTaskId,
+    currentTask,
     currentTaskId,
     currentTaskItemId,
+    deleteTask,
+    editTask,
+    editTaskId,
     getTasks,
+    isOpenEditMenu,
     isStarted,
     lastTask,
     sec,

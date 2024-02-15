@@ -19,3 +19,9 @@ export function timeFormat(sec: number, showSeconds: boolean = true) {
 
   return `${hoursStr}:${minutesStr}:${secondsStr}`
 }
+
+export function timeToSec(time: string) {
+  const [hours, minutes, seconds] = time.split(':').map(Number)
+
+  return hours * 3600 + minutes * 60 + seconds
+}
