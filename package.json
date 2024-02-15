@@ -32,7 +32,9 @@
     "electron-store": "^8.1.0",
     "interactjs": "^1.10.26",
     "lucide-vue-next": "^0.321.0",
+    "maska": "^2.1.11",
     "nanoid": "^5.0.5",
+    "radix-vue": "^1.4.6",
     "tailwind-merge": "^2.2.1",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"

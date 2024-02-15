@@ -139,4 +139,30 @@ export const api: TaskApi = {
 
     store.set('tasks', tasks)
   },
+
+  deleteTask(id) {
+    const tasks = store.get('tasks') as Task[]
+    const taskIndex = tasks.findIndex(t => t.id === id)
+    const taskRecords = store.get('taskRecords') as TaskRecord[]
+
+    if (taskIndex === -1)
+      return
+
+    const records = taskRecords.filter(item => item.taskId !== id)
+
+    tasks.splice(taskIndex, 1)
+    store.set('tasks', tasks)
+    store.set('taskRecords', records)
+  },
+
+  deleteTaskRecord(id) {
+    const items = store.get('taskRecords') as TaskRecord[]
+    const index = items.findIndex(i => i.id === id)
+
+    if (index === -1)
+      return
+
+    items.splice(index, 1)
+    store.set('taskRecords', items)
+  },
 }

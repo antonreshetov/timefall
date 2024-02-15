@@ -8,6 +8,13 @@ const { api } = window.electron
 const { isStarted } = useTasks()
 
 const taskRecords = shallowRef<TaskRecordWithInfo[]>([])
+const editRecordId = ref<string>()
+const contextRecordId = ref<string>()
+const isOpenEditMenu = ref(false)
+
+const editRecord = computed(() => {
+  return taskRecords.value.find(r => r.id === editRecordId.value)
+})
 
 const taskRecordSortedByDate = computed(() => {
   return taskRecords.value.sort((a, b) => {
@@ -35,13 +42,23 @@ function getTaskRecords() {
   taskRecords.value = api.getTaskRecords()
 }
 
+function deleteTaskRecord(id: string) {
+  api.deleteTaskRecord(id)
+  getTaskRecords()
+}
+
 watch(isStarted, () => {
   getTaskRecords()
 })
 
 export function useRecords() {
   return {
+    contextRecordId,
+    deleteTaskRecord,
+    editRecord,
+    editRecordId,
     getTaskRecords,
+    isOpenEditMenu,
     taskRecords,
     taskRecordsGroupedByCreatedDate,
   }

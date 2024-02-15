@@ -51,6 +51,8 @@ export interface FolderApi {
 export interface TaskApi {
   addTask: (task: Pick<Task, 'name' | 'folderId'>) => string
   addTaskRecord: (item: Pick<TaskRecord, 'taskId'>) => string
+  deleteTask: (id: string) => void
+  deleteTaskRecord: (id: string) => void
   getTaskRecords: () => TaskRecordWithInfo[]
   getTasks: () => TaskWithRecords[]
   updateTask: (id: string, task: Partial<Omit<Task, 'id'>>) => void

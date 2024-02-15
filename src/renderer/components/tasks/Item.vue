@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import chroma from 'chroma-js'
 import { usePreferredDark } from '@vueuse/core'
 import SolarPlayBold from '~icons/solar/play-bold'
 import SolarPauseBold from '~icons/solar/pause-bold'
-
 import { useTasks } from '@/components/tasks/composables'
 import { timeFormat } from '@/utils'
-
-const props = defineProps<Props>()
-
-const isDark = usePreferredDark()
+import * as Popover from '@/components/ui/shadcn/popover'
 
 interface Props {
   id: string
@@ -18,15 +14,36 @@ interface Props {
   duration: number
   color?: string
 }
+const props = defineProps<Props>()
 
-const { start, stop, currentTaskId, sec } = useTasks()
+const isDark = usePreferredDark()
+
+const {
+  start,
+  stop,
+  currentTaskId,
+  sec,
+  contextTaskId,
+  isOpenEditMenu,
+  editTaskId,
+} = useTasks()
 
 const isStarted = computed(() => currentTaskId.value === props.id)
+const isOpen = computed(
+  () => isOpenEditMenu.value && editTaskId.value === props.id,
+)
 
 function onClick() {
   if (!isStarted.value)
     start(props.id)
   else stop()
+}
+
+function onUpdateOpen(bool: boolean) {
+  if (!bool) {
+    isOpenEditMenu.value = false
+    contextTaskId.value = ''
+  }
 }
 
 const actionStyles = computed(() => {
@@ -47,12 +64,20 @@ const actionStyles = computed(() => {
     backgroundColor,
   }
 })
+
+watchEffect(() => {
+  if (isOpen.value)
+    contextTaskId.value = props.id
+})
 </script>
 
 <template>
   <div
     data-task-item
     class="flex items-center gap-2 py-2 px-4 mx-2 rounded"
+    :class="[
+      contextTaskId === id ? 'bg-neutral-100 dark:bg-neutral-800 ' : null,
+    ]"
     :style="{
       backgroundColor: isStarted ? color : null,
       color: isStarted ? 'white' : null,
@@ -81,8 +106,24 @@ const actionStyles = computed(() => {
         {{ name }}
       </div>
     </div>
-    <div class="tabular-nums flex-shrink-0">
-      {{ timeFormat(isStarted ? duration + sec : duration, isStarted) }}
-    </div>
+    <Popover.Root
+      :open="isOpen"
+      @update:open="onUpdateOpen"
+    >
+      <Popover.Trigger
+        :as-child="true"
+        as="div"
+      >
+        <div class="tabular-nums flex-shrink-0">
+          {{ timeFormat(isStarted ? duration + sec : duration, isStarted) }}
+        </div>
+      </Popover.Trigger>
+      <Popover.Content
+        side="right"
+        class="w-[350px]"
+      >
+        <TasksEditMenu />
+      </Popover.Content>
+    </Popover.Root>
   </div>
 </template>

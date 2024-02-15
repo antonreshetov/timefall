@@ -7,6 +7,12 @@
   body {
     @apply text-neutral-800 dark:text-neutral-300 bg-white dark:bg-neutral-900 text-sm;
   }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 :root {
