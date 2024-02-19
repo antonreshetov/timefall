@@ -29,6 +29,30 @@
 
 The Timefall project is an open-source software that is being developed to provide users with an efficient and convenient time management tool. Created with modern software trends in mind, Timefall is a tool accessible to anyone who wants to better understand how they allocate their time and how it can be used most productively. It's a simple yet powerful tool capable of adapting to each user's needs.
 
+## Development
+
+### Prerequisites
+
+The project uses Bun for building and running. Please make sure you have [Bun](https://bun.sh/) installed.
+
+```
+# Install dependencies
+bun install
+
+# Run the app
+bun run dev
+```
+
+## Build
+
+
+
+```
+# Build the app
+bun make
+```
+
+
 ## How can I help?
 
 Now a good help would be your recognition and star for the project to gain visibility on GitHub.
