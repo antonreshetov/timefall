@@ -49,7 +49,7 @@ bun run dev
 
 ```
 # Build the app
-bun make
+bun run make
 ```
 
 
