@@ -6,6 +6,7 @@ import { store } from './services/store'
 const isDev = process.env.NODE_ENV === 'development'
 
 let mainWindow: BrowserWindow
+let isQuitting = false
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 // eslint-disable-next-line ts/no-require-imports
@@ -42,6 +43,16 @@ function createWindow() {
   mainWindow.on('move', () => store.app.set('bounds', mainWindow.getBounds()))
   mainWindow.on('resize', () =>
     store.app.set('bounds', mainWindow.getBounds()))
+
+  mainWindow.on('close', (event: Event) => {
+    if (!isQuitting) {
+      event.preventDefault()
+      mainWindow.hide()
+    }
+    else {
+      mainWindow = null
+    }
+  })
 }
 
 app.on('ready', createWindow)
@@ -51,7 +62,10 @@ app.on('window-all-closed', () => {
     app.quit()
 })
 
+app.on('before-quit', () => {
+  isQuitting = true
+})
+
 app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0)
-    createWindow()
+  mainWindow.show()
 })
