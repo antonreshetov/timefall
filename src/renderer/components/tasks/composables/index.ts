@@ -1,8 +1,11 @@
 import { computed, ref, shallowRef } from 'vue'
 import type { TaskWithRecords } from '~/services/api/types'
 import { timeFormat } from '@/utils'
+import { useFolders } from '@/components/folders/composables'
 
 const { api } = window.electron
+
+const { selectedFolderId } = useFolders()
 
 let timer: NodeJS.Timeout
 
@@ -27,6 +30,12 @@ const lastTask = computed(() => {
 
 const editTask = computed(() => {
   return tasks.value.find(t => t.id === editTaskId.value)
+})
+
+const filteredTasks = computed(() => {
+  if (!selectedFolderId.value)
+    return tasks.value
+  return tasks.value.filter(t => t.folderId === selectedFolderId.value)
 })
 
 const timeFormatted = computed(() => {
@@ -64,8 +73,8 @@ function getTasks() {
   tasks.value = api.getTasks()
 }
 
-function addTask() {
-  api.addTask({ name: 'Untitled Task', folderId: '' })
+function addTask(folderId: string = '') {
+  api.addTask({ name: 'Untitled Task', folderId })
   getTasks()
 }
 
@@ -90,6 +99,7 @@ export function useTasks() {
     deleteTask,
     editTask,
     editTaskId,
+    filteredTasks,
     getTasks,
     isOpenEditMenu,
     isStarted,

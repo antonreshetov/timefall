@@ -5,6 +5,8 @@ export interface Folder {
   taskIds: string[]
   createdAt: number
   updatedAt?: number
+  color?: string
+  isOpen?: boolean
 }
 
 export interface FolderWithTasks extends Folder {
@@ -46,6 +48,9 @@ export interface TaskRecordWithInfo extends TaskRecord {
 export interface FolderApi {
   addFolder: (folder: Pick<Folder, 'name'>) => void
   getFolders: () => Folder[]
+  updateFolder: (id: string, folder: Partial<Omit<Folder, 'id'>>) => void
+  updateFolders: (folders: Folder[]) => void
+  deleteFolder: (id: string) => void
 }
 
 export interface TaskApi {
