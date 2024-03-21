@@ -68,12 +68,15 @@ function canDrop(id: string) {
   )
 }
 
-function onDrag(e: DragEvent) {
+function onDragStart(e: DragEvent) {
   e.dataTransfer.setData('id', props.node.id)
-  root.draggedNodeId.value = props.node.id
+  e.dataTransfer.setData('name', props.node.name)
 
   const children = getChildren(props.node)
+
+  root.draggedNodeId.value = props.node.id
   root.draggedNodeChildrenIds.value = children.map(node => node.id)
+  root.onDragStart(e)
 }
 
 function onDragOver(e: DragEvent) {
@@ -139,7 +142,7 @@ watch(
     style="position: relative"
     :data-hovered="isHovered"
     :data-selected="isSelected"
-    @dragstart="onDrag"
+    @dragstart="onDragStart"
     @dragover="onDragOver"
     @dragleave="onDragLeave"
     @dragend="onDragEnd"

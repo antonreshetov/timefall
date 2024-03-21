@@ -23,6 +23,7 @@ export interface TreeInject {
   draggedNodeChildrenIds: Ref<string[]>
   draggedNodeId: Ref<string>
   isRootHovered: Ref<boolean>
+  onDragStart: (e: DragEvent) => void
   selectedNodeId: Ref<string>
   toggleOpen: (id: string) => void
 }

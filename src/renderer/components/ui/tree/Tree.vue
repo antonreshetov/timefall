@@ -13,6 +13,7 @@ interface Props {
 
 interface Emits {
   (e: 'update', value: Node[]): void
+  (e: 'dragstart', value: DragEvent): void
 }
 
 const props = defineProps<Props>()
@@ -36,11 +37,16 @@ function toggleOpen(id: string) {
   })
 }
 
+function onDragStart(e: DragEvent) {
+  emit('dragstart', e)
+}
+
 provide(treeKey, {
   data: localData,
-  draggedNodeId,
   draggedNodeChildrenIds,
+  draggedNodeId,
   isRootHovered,
+  onDragStart,
   selectedNodeId,
   toggleOpen,
 })
