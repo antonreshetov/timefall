@@ -39,6 +39,17 @@ function onDrop(e: DragEvent, node: Node) {
   getTaskRecords()
 }
 
+function onDragStart(e: DragEvent) {
+  const name = e.dataTransfer.getData('name')
+  const el = document.createElement('div')
+
+  el.innerHTML = name
+
+  document.body.appendChild(el)
+  e.dataTransfer.setDragImage(el, 0, 0)
+  setTimeout(() => el.remove(), 0)
+}
+
 function onContextMenu(id: string) {
   editFolderId.value = id
   contextFolderId.value = id
@@ -69,13 +80,14 @@ function onDelete() {
     :draggable="true"
     :selected-node-id="selectedFolderId"
     @update="onUpdate"
+    @dragstart="onDragStart"
   >
     <template #default="{ node, stat }">
       <ContextMenu.Root @update:open="onOpen">
         <ContextMenu.Trigger>
           <FoldersTreeItem :node="node">
             <div
-              class="flex items-center gap-1"
+              class="flex items-center gap-1 py-[2px]"
               @click="selectedFolderId = node.id"
               @drop="onDrop($event, node)"
               @contextmenu="onContextMenu(node.id)"
