@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { nextTick, ref, watchEffect } from 'vue'
 import { Plus } from 'lucide-vue-next'
 import { useTasks } from '@/components/tasks/composables'
 import { useFolders } from '@/components/folders/composables'
@@ -15,6 +15,7 @@ const { addFolder } = useFolders()
 
 const sidebarRef = ref<HTMLElement>()
 const gutterRef = ref<{ $el: HTMLElement }>()
+const foldersRef = ref<HTMLElement>()
 
 const { sidebarWidth } = useApp()
 const { width } = useGutter(
@@ -23,6 +24,13 @@ const { width } = useGutter(
   Number.parseInt(sidebarWidth.value),
   APP_DEFAULTS.sizes.sidebar,
 )
+
+function onAddFolder() {
+  addFolder({ name: 'Untitled' })
+  nextTick(() => {
+    foldersRef.value?.scrollTo(0, foldersRef.value.scrollHeight)
+  })
+}
 
 watchEffect(() => {
   sidebarWidth.value = `${width.value}px`
@@ -44,13 +52,16 @@ watchEffect(() => {
       Folders
       <UiButton
         variant="ghost-sidebar"
-        @click="addFolder({ name: 'Untitled' })"
+        @click="onAddFolder"
       >
         <Plus class="w-4 h-4" />
       </UiButton>
     </div>
     <div class="flex flex-col gap-2 flex-grow">
-      <div class="flex-grow overflow-auto h-1 mt-1">
+      <div
+        ref="foldersRef"
+        class="flex-grow overflow-auto h-1 mt-1"
+      >
         <FoldersTree />
       </div>
       <div>
