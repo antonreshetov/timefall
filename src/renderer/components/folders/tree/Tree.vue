@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ChevronRight, Folder } from 'lucide-vue-next'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import type { Node } from '@/components/ui/tree/types'
 import { useFolders } from '@/components/folders/composables'
 import * as ContextMenu from '@/components/ui/shadcn/context-menu'
@@ -24,7 +24,7 @@ const api = window.electron.api
 
 const isConfirmOpen = ref(false)
 
-getFolders()
+const tree = computed(() => folders.value as Node[])
 
 function onUpdate(data: any) {
   updateFolders(JSON.parse(JSON.stringify(data)))
@@ -72,11 +72,13 @@ function onDelete() {
 
   isConfirmOpen.value = false
 }
+
+getFolders()
 </script>
 
 <template>
   <UiTree
-    :data="folders as Node[]"
+    :data="tree"
     :draggable="true"
     :selected-node-id="selectedFolderId"
     @update="onUpdate"
