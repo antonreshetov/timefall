@@ -96,7 +96,7 @@ function onDelete() {
                 v-if="node.children.length"
                 class="w-4 h-4"
                 :class="{ 'rotate-90': stat.isOpen }"
-                @click="stat.isOpen = !stat.isOpen"
+                @click.stop="stat.isOpen = !stat.isOpen"
               />
               <div
                 v-else
