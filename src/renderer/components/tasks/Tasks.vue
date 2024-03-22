@@ -3,6 +3,7 @@ import { Plus } from 'lucide-vue-next'
 import { nextTick, ref, watchEffect } from 'vue'
 import { useTasks } from '@/components/tasks/composables'
 import { useRecords } from '@/components/records/composables'
+import { useFolders } from '@/components/folders/composables'
 import type { TaskRecord } from '~/services/api/types'
 import { useApp, useGutter } from '@/composables'
 import { APP_DEFAULTS } from '~/services/store/constants'
@@ -12,7 +13,6 @@ import * as Dialog from '@/components/ui/shadcn/dialog'
 const { store } = window.electron
 
 const {
-  tasks,
   getTasks,
   addTask,
   editTaskId,
@@ -21,8 +21,10 @@ const {
   isOpenEditMenu,
   stop,
   currentTaskId,
+  filteredTasks,
 } = useTasks()
 const { getTaskRecords } = useRecords()
+const { selectedFolderId } = useFolders()
 const { tasksWidth, sidebarWidth, tasksWidthOffset } = useApp()
 
 getTasks()
@@ -63,7 +65,7 @@ function onClick(id: string) {
 }
 
 function onAddTask() {
-  addTask()
+  addTask(selectedFolderId.value)
   nextTick(() => {
     tasksRef.value?.scrollTo(0, tasksRef.value.scrollHeight)
   })
@@ -77,6 +79,10 @@ function onDelete() {
   deleteTask(editTaskId.value)
   getTaskRecords()
 }
+
+function onDragStart(e: DragEvent, id: string) {
+  e.dataTransfer.setData('taskId', id)
+}
 </script>
 
 <template>
@@ -86,7 +92,15 @@ function onDelete() {
     class="overflow-auto border-r border-neutral-200 dark:border-neutral-800 select-none relative"
   >
     <UiTopbar>
-      <div class="px-4 text-sm flex justify-end flex-grow gap-2">
+      <div
+        class="px-4 text-sm flex items-center justify-between flex-grow gap-2"
+      >
+        <UiButton
+          variant="ghost"
+          @click="selectedFolderId = ''"
+        >
+          All Tasks
+        </UiButton>
         <UiButton
           variant="ghost"
           @click="onAddTask"
@@ -99,12 +113,14 @@ function onDelete() {
       <ContextMenu.Root @update:open="onOpen">
         <ContextMenu.Trigger>
           <TasksItem
-            v-for="i in tasks"
+            v-for="i in filteredTasks"
             :id="i.id"
             :key="i.id"
             :name="i.name"
             :color="i.color"
+            :draggable="true"
             :duration="taskTotalDuration(i.records)"
+            @dragstart="onDragStart($event, i.id)"
             @contextmenu="onClick(i.id)"
           />
         </ContextMenu.Trigger>

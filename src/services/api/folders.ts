@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import store from '../store/db'
-import type { Folder, FolderApi, FolderWithTasks, Task } from './types'
+import type { Folder, FolderApi, Task } from './types'
+import { getRandomColor } from './utils'
 
 export const api: FolderApi = {
   addFolder: (folder) => {
@@ -12,6 +13,8 @@ export const api: FolderApi = {
     newFolder.parentId = ''
     newFolder.taskIds = []
     newFolder.updatedAt = null
+    newFolder.color = getRandomColor()
+    newFolder.isOpen = false
 
     _folder.push(newFolder)
 
@@ -19,13 +22,46 @@ export const api: FolderApi = {
   },
 
   getFolders: () => {
-    const folders = store.get('folders') as FolderWithTasks[]
-    const tasks = store.get('tasks') as Task[]
+    const folders = store.get('folders') as Folder[]
+    return folders
+  },
 
-    folders.forEach((folder) => {
-      folder.tasks = tasks.filter(task => task.folderId === folder.id)
+  updateFolders: (folders) => {
+    store.set('folders', folders)
+  },
+
+  updateFolder(id, folder) {
+    const folders = store.get('folders') as Folder[]
+    const index = folders.findIndex(i => i.id === id)
+
+    if (index === -1)
+      return
+
+    folders[index] = {
+      ...folders[index],
+      ...folder,
+      updatedAt: new Date().getTime(),
+    }
+
+    store.set('folders', folders)
+  },
+
+  deleteFolder(id) {
+    const folders = store.get('folders') as Folder[]
+    const tasks = store.get('tasks') as Task[]
+    const index = folders.findIndex(i => i.id === id)
+
+    if (index === -1)
+      return
+
+    folders.splice(index, 1)
+
+    tasks.forEach((task) => {
+      if (task.folderId === id)
+        task.folderId = ''
     })
 
-    return folders
+    store.set('tasks', tasks)
+    store.set('folders', folders)
   },
 }
