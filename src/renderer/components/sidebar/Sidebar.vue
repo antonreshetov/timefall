@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { nextTick, ref, watchEffect } from 'vue'
+import { nextTick, onMounted, ref, watchEffect } from 'vue'
 import { Plus } from 'lucide-vue-next'
+import type PS from 'perfect-scrollbar'
 import { useTasks } from '@/components/tasks/composables'
 import { useFolders } from '@/components/folders/composables'
 import { useApp, useGutter } from '@/composables'
@@ -15,7 +16,7 @@ const { addFolder } = useFolders()
 
 const sidebarRef = ref<HTMLElement>()
 const gutterRef = ref<{ $el: HTMLElement }>()
-const foldersRef = ref<HTMLElement>()
+const scrollRef = ref<PS>()
 
 const { sidebarWidth } = useApp()
 const { width } = useGutter(
@@ -27,9 +28,15 @@ const { width } = useGutter(
 
 function onAddFolder() {
   addFolder({ name: 'Untitled' })
+
+  const scrollEl = sidebarRef.value.querySelector('[data-scroll]')
   nextTick(() => {
-    foldersRef.value?.scrollTo(0, foldersRef.value.scrollHeight)
+    scrollEl.scrollTo(0, scrollEl.scrollHeight)
   })
+}
+
+function onUpdateFolders() {
+  nextTick(() => scrollRef.value.update())
 }
 
 watchEffect(() => {
@@ -42,12 +49,12 @@ watchEffect(() => {
   <div
     ref="sidebarRef"
     data-sidebar
-    class="flex flex-col px-2 pb-2 bg-neutral-100 dark:bg-neutral-800 select-none relative"
+    class="flex flex-col _px-2 pb-2 bg-neutral-100 dark:bg-neutral-800 select-none relative"
   >
     <UiTopbar class="bg-neutral-100 dark:bg-neutral-800" />
-    <SidebarMenu class="pb-2" />
+    <SidebarMenu class="pb-2 px-2" />
     <div
-      class="flex w-full items-center justify-between pl-1 text-[10px] uppercase dark:text-neutral-400"
+      class="flex w-full items-center justify-between _pl-1 px-2 pl-3 text-[10px] uppercase dark:text-neutral-400"
     >
       Folders
       <UiButton
@@ -58,13 +65,14 @@ watchEffect(() => {
       </UiButton>
     </div>
     <div class="flex flex-col gap-2 flex-grow">
-      <div
-        ref="foldersRef"
-        class="flex-grow overflow-auto h-1 mt-1"
+      <PerfectScrollbar
+        ref="scrollRef"
+        data-scroll
+        class="flex-grow overflow-auto h-1 mt-1 px-2"
       >
-        <FoldersTree />
-      </div>
-      <div>
+        <FoldersTree @update="onUpdateFolders" />
+      </PerfectScrollbar>
+      <div class="px-2">
         <div
           v-if="lastTask"
           class="flex items-center gap-2 bg-white dark:bg-neutral-700 rounded px-2 py-1 dark:text-white"

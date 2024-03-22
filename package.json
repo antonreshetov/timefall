@@ -37,7 +37,8 @@
     "radix-vue": "^1.4.6",
     "tailwind-merge": "^2.2.1",
     "vue": "^3.4.15",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vue3-perfect-scrollbar": "^1.6.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.3",

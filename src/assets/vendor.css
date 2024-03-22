@@ -1,0 +1,15 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+  .ps__rail-y {
+    @apply !bg-transparent;
+  }
+
+  .ps__thumb-y {
+    @apply !bg-neutral-300 dark:!bg-neutral-700 w-[2px];
+  }
+
+}
