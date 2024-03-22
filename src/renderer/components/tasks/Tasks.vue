@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Plus } from 'lucide-vue-next'
-import { nextTick, ref, watchEffect } from 'vue'
+import { nextTick, ref, watch, watchEffect } from 'vue'
+import type PS from 'perfect-scrollbar'
 import { useTasks } from '@/components/tasks/composables'
 import { useRecords } from '@/components/records/composables'
 import { useFolders } from '@/components/folders/composables'
@@ -27,10 +28,9 @@ const { getTaskRecords } = useRecords()
 const { selectedFolderId } = useFolders()
 const { tasksWidth, sidebarWidth, tasksWidthOffset } = useApp()
 
-getTasks()
-
 const tasksRef = ref<HTMLElement>()
 const gutterRef = ref<{ $el: HTMLElement }>()
+const scrollRef = ref<PS>()
 
 const isConfirmOpen = ref(false)
 
@@ -42,13 +42,6 @@ const { width } = useGutter(
   Number.parseInt(tasksWidthOffset.value),
   minWidth,
 )
-
-watchEffect(() => {
-  const _width = width.value - Number.parseInt(sidebarWidth.value)
-
-  tasksWidth.value = `${_width}px`
-  store.app.set('sizes.tasks', _width)
-})
 
 function taskTotalDuration(items: TaskRecord[] = []) {
   return items.reduce((acc, i) => acc + i.duration, 0)
@@ -85,6 +78,23 @@ function onDelete() {
 function onDragStart(e: DragEvent, id: string) {
   e.dataTransfer.setData('taskId', id)
 }
+
+watchEffect(() => {
+  const _width = width.value - Number.parseInt(sidebarWidth.value)
+
+  tasksWidth.value = `${_width}px`
+  store.app.set('sizes.tasks', _width)
+})
+
+watch(selectedFolderId, () => {
+  const scrollEl = tasksRef.value.querySelector('[data-scroll]')
+  nextTick(() => {
+    scrollEl.scrollTop = 0
+    scrollRef.value.update()
+  })
+})
+
+getTasks()
 </script>
 
 <template>
@@ -113,6 +123,7 @@ function onDragStart(e: DragEvent, id: string) {
     </UiTopbar>
     <div class="flex flex-col gap-2 flex-grow">
       <PerfectScrollbar
+        ref="scrollRef"
         data-scroll
         class="flex-grow h-1"
       >

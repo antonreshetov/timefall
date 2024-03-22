@@ -8,6 +8,12 @@ import * as Dialog from '@/components/ui/shadcn/dialog'
 import { useRecords } from '@/components/records/composables'
 import { useTasks } from '@/components/tasks/composables'
 
+interface Emits {
+  (e: 'update'): void
+}
+
+const emit = defineEmits<Emits>()
+
 const {
   folders,
   updateFolders,
@@ -28,6 +34,7 @@ const tree = computed(() => folders.value as Node[])
 
 function onUpdate(data: any) {
   updateFolders(JSON.parse(JSON.stringify(data)))
+  emit('update')
 }
 
 function onDrop(e: DragEvent, node: Node) {

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { nextTick, ref, watchEffect } from 'vue'
+import { nextTick, onMounted, ref, watchEffect } from 'vue'
 import { Plus } from 'lucide-vue-next'
+import type PS from 'perfect-scrollbar'
 import { useTasks } from '@/components/tasks/composables'
 import { useFolders } from '@/components/folders/composables'
 import { useApp, useGutter } from '@/composables'
@@ -15,6 +16,7 @@ const { addFolder } = useFolders()
 
 const sidebarRef = ref<HTMLElement>()
 const gutterRef = ref<{ $el: HTMLElement }>()
+const scrollRef = ref<PS>()
 
 const { sidebarWidth } = useApp()
 const { width } = useGutter(
@@ -31,6 +33,10 @@ function onAddFolder() {
   nextTick(() => {
     scrollEl.scrollTo(0, scrollEl.scrollHeight)
   })
+}
+
+function onUpdateFolders() {
+  nextTick(() => scrollRef.value.update())
 }
 
 watchEffect(() => {
@@ -60,10 +66,11 @@ watchEffect(() => {
     </div>
     <div class="flex flex-col gap-2 flex-grow">
       <PerfectScrollbar
+        ref="scrollRef"
         data-scroll
         class="flex-grow overflow-auto h-1 mt-1 px-2"
       >
-        <FoldersTree />
+        <FoldersTree @update="onUpdateFolders" />
       </PerfectScrollbar>
       <div class="px-2">
         <div
