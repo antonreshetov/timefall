@@ -66,8 +66,10 @@ function onClick(id: string) {
 
 function onAddTask() {
   addTask(selectedFolderId.value)
+
+  const scrollEl = tasksRef.value.querySelector('[data-scroll]')
   nextTick(() => {
-    tasksRef.value?.scrollTo(0, tasksRef.value.scrollHeight)
+    scrollEl.scrollTo(0, scrollEl.scrollHeight)
   })
 }
 
@@ -89,7 +91,7 @@ function onDragStart(e: DragEvent, id: string) {
   <div
     ref="tasksRef"
     data-tasks
-    class="overflow-auto border-r border-neutral-200 dark:border-neutral-800 select-none relative"
+    class="flex flex-col border-r border-neutral-200 dark:border-neutral-800 select-none relative"
   >
     <UiTopbar>
       <div
@@ -109,35 +111,40 @@ function onDragStart(e: DragEvent, id: string) {
         </UiButton>
       </div>
     </UiTopbar>
-    <div>
-      <ContextMenu.Root @update:open="onOpen">
-        <ContextMenu.Trigger>
-          <TasksItem
-            v-for="i in filteredTasks"
-            :id="i.id"
-            :key="i.id"
-            :name="i.name"
-            :color="i.color"
-            :draggable="true"
-            :duration="taskTotalDuration(i.records)"
-            @dragstart="onDragStart($event, i.id)"
-            @contextmenu="onClick(i.id)"
-          />
-        </ContextMenu.Trigger>
-        <ContextMenu.Content>
-          <ContextMenu.Item @click="onAddTask">
-            New Task
-          </ContextMenu.Item>
-          <ContextMenu.Separator />
-          <ContextMenu.Item @click="isOpenEditMenu = true">
-            Edit...
-          </ContextMenu.Item>
-          <ContextMenu.Separator />
-          <ContextMenu.Item @click="isConfirmOpen = true">
-            Delete
-          </ContextMenu.Item>
-        </ContextMenu.Content>
-      </ContextMenu.Root>
+    <div class="flex flex-col gap-2 flex-grow">
+      <PerfectScrollbar
+        data-scroll
+        class="flex-grow h-1"
+      >
+        <ContextMenu.Root @update:open="onOpen">
+          <ContextMenu.Trigger>
+            <TasksItem
+              v-for="i in filteredTasks"
+              :id="i.id"
+              :key="i.id"
+              :name="i.name"
+              :color="i.color"
+              :draggable="true"
+              :duration="taskTotalDuration(i.records)"
+              @dragstart="onDragStart($event, i.id)"
+              @contextmenu="onClick(i.id)"
+            />
+          </ContextMenu.Trigger>
+          <ContextMenu.Content>
+            <ContextMenu.Item @click="onAddTask">
+              New Task
+            </ContextMenu.Item>
+            <ContextMenu.Separator />
+            <ContextMenu.Item @click="isOpenEditMenu = true">
+              Edit...
+            </ContextMenu.Item>
+            <ContextMenu.Separator />
+            <ContextMenu.Item @click="isConfirmOpen = true">
+              Delete
+            </ContextMenu.Item>
+          </ContextMenu.Content>
+        </ContextMenu.Root>
+      </PerfectScrollbar>
     </div>
     <UiGutter ref="gutterRef" />
     <Dialog.Root

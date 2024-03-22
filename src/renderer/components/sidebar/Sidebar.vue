@@ -15,7 +15,6 @@ const { addFolder } = useFolders()
 
 const sidebarRef = ref<HTMLElement>()
 const gutterRef = ref<{ $el: HTMLElement }>()
-const foldersRef = ref<HTMLElement>()
 
 const { sidebarWidth } = useApp()
 const { width } = useGutter(
@@ -27,8 +26,10 @@ const { width } = useGutter(
 
 function onAddFolder() {
   addFolder({ name: 'Untitled' })
+
+  const scrollEl = sidebarRef.value.querySelector('[data-scroll]')
   nextTick(() => {
-    foldersRef.value?.scrollTo(0, foldersRef.value.scrollHeight)
+    scrollEl.scrollTo(0, scrollEl.scrollHeight)
   })
 }
 
@@ -58,12 +59,12 @@ watchEffect(() => {
       </UiButton>
     </div>
     <div class="flex flex-col gap-2 flex-grow">
-      <div
-        ref="foldersRef"
+      <PerfectScrollbar
+        data-scroll
         class="flex-grow overflow-auto h-1 mt-1"
       >
         <FoldersTree />
-      </div>
+      </PerfectScrollbar>
       <div>
         <div
           v-if="lastTask"

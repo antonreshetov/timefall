@@ -42,7 +42,7 @@ function onDelete() {
 <template>
   <div
     data-tracking-list
-    class="overflow-auto select-none"
+    class="select-none flex flex-col"
   >
     <UiTopbar>
       <div class="flex justify-between w-full px-4 text-sm">
@@ -51,32 +51,38 @@ function onDelete() {
         </div>
       </div>
     </UiTopbar>
-    <div>
+    <div class="flex flex-col flex-grow">
       <RecordsGroup
         v-for="(v, k) in taskRecordsGroupedByCreatedDate"
         :key="k"
         :date="k"
         :records="v"
+        class="flex flex-col flex-grow"
       >
-        <ContextMenu.Root @update:open="onOpen">
-          <ContextMenu.Trigger>
-            <RecordsItem
-              v-for="i in v"
-              :key="i.id"
-              :data="i"
-              @contextmenu="onClick(i.id)"
-            />
-          </ContextMenu.Trigger>
-          <ContextMenu.Content>
-            <ContextMenu.Item @click="isOpenEditMenu = true">
-              Edit..
-            </ContextMenu.Item>
-            <ContextMenu.Separator />
-            <ContextMenu.Item @click="isConfirmOpen = true">
-              Delete
-            </ContextMenu.Item>
-          </ContextMenu.Content>
-        </ContextMenu.Root>
+        <PerfectScrollbar
+          data-scroll
+          class="flex-grow h-1"
+        >
+          <ContextMenu.Root @update:open="onOpen">
+            <ContextMenu.Trigger>
+              <RecordsItem
+                v-for="i in v"
+                :key="i.id"
+                :data="i"
+                @contextmenu="onClick(i.id)"
+              />
+            </ContextMenu.Trigger>
+            <ContextMenu.Content>
+              <ContextMenu.Item @click="isOpenEditMenu = true">
+                Edit..
+              </ContextMenu.Item>
+              <ContextMenu.Separator />
+              <ContextMenu.Item @click="isConfirmOpen = true">
+                Delete
+              </ContextMenu.Item>
+            </ContextMenu.Content>
+          </ContextMenu.Root>
+        </PerfectScrollbar>
       </RecordsGroup>
     </div>
     <Dialog.Root
