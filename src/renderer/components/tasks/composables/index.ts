@@ -1,9 +1,9 @@
-import { computed, ref, shallowRef } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import type { TaskWithRecords } from '~/services/api/types'
 import { timeFormat } from '@/utils'
 import { useFolders } from '@/components/folders/composables'
 
-const { api } = window.electron
+const { api, store } = window.electron
 
 const { selectedFolderId } = useFolders()
 
@@ -15,7 +15,7 @@ const sec = ref(0)
 const currentTaskId = ref<string>()
 const currentTaskItemId = ref<string>()
 const editTaskId = ref<string>()
-const lastTaskId = ref<string>()
+const lastTaskId = ref<string>(store.app.get('lastTaskId'))
 const contextTaskId = ref<string>()
 const isStarted = ref(false)
 const isOpenEditMenu = ref(false)
@@ -87,6 +87,10 @@ function deleteTask(id: string) {
   api.deleteTask(id)
   getTasks()
 }
+
+watch(lastTaskId, (id) => {
+  store.app.set('lastTaskId', id)
+})
 
 export function useTasks() {
   return {

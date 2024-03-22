@@ -6,6 +6,8 @@ export interface AppStore {
     sidebar: number
     tasks: number
   }
+  lastTaskId?: string
+  selectedFolderId?: string
 }
 
 export interface Store {

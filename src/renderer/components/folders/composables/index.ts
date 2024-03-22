@@ -1,10 +1,10 @@
-import { computed, ref, shallowRef } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import type { Folder } from '~/services/api/types'
 
-const { api } = window.electron
+const { api, store } = window.electron
 
 const folders = shallowRef<Folder[]>([])
-const selectedFolderId = ref<string>()
+const selectedFolderId = ref<string>(store.app.get('selectedFolderId'))
 const editFolderId = ref<string>()
 const contextFolderId = ref<string>()
 const isOpenEditMenu = ref(false)
@@ -28,6 +28,10 @@ function getFolders() {
 function updateFolders(data: any) {
   api.updateFolders(data)
 }
+
+watch(selectedFolderId, (id) => {
+  store.app.set('selectedFolderId', id)
+})
 
 export function useFolders() {
   return {
