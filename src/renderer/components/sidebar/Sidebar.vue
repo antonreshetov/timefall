@@ -43,12 +43,12 @@ watchEffect(() => {
   <div
     ref="sidebarRef"
     data-sidebar
-    class="flex flex-col px-2 pb-2 bg-neutral-100 dark:bg-neutral-800 select-none relative"
+    class="flex flex-col _px-2 pb-2 bg-neutral-100 dark:bg-neutral-800 select-none relative"
   >
     <UiTopbar class="bg-neutral-100 dark:bg-neutral-800" />
-    <SidebarMenu class="pb-2" />
+    <SidebarMenu class="pb-2 px-2" />
     <div
-      class="flex w-full items-center justify-between pl-1 text-[10px] uppercase dark:text-neutral-400"
+      class="flex w-full items-center justify-between _pl-1 px-2 pl-3 text-[10px] uppercase dark:text-neutral-400"
     >
       Folders
       <UiButton
@@ -61,11 +61,11 @@ watchEffect(() => {
     <div class="flex flex-col gap-2 flex-grow">
       <PerfectScrollbar
         data-scroll
-        class="flex-grow overflow-auto h-1 mt-1"
+        class="flex-grow overflow-auto h-1 mt-1 px-2"
       >
         <FoldersTree />
       </PerfectScrollbar>
-      <div>
+      <div class="px-2">
         <div
           v-if="lastTask"
           class="flex items-center gap-2 bg-white dark:bg-neutral-700 rounded px-2 py-1 dark:text-white"
