@@ -7,7 +7,11 @@ import type {
   TaskRecord,
   TaskWithRecords,
 } from './types'
-import { getRandomColor } from './utils'
+import { COLORS } from './constants'
+
+function getRandomColor() {
+  return COLORS[Math.floor(Math.random() * COLORS.length)]
+}
 
 export const api: TaskApi = {
   addTask(task) {

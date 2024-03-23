@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid'
 import store from '../store/db'
 import type { Folder, FolderApi, Task } from './types'
-import { getRandomColor } from './utils'
 
 export const api: FolderApi = {
   addFolder: (folder) => {
@@ -13,7 +12,6 @@ export const api: FolderApi = {
     newFolder.parentId = ''
     newFolder.taskIds = []
     newFolder.updatedAt = null
-    newFolder.color = getRandomColor()
     newFolder.isOpen = false
 
     _folder.push(newFolder)
