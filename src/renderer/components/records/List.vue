@@ -42,7 +42,7 @@ function onDelete() {
 <template>
   <div
     data-tracking-list
-    class="select-none flex flex-col"
+    class="select-none"
   >
     <UiTopbar>
       <div class="flex justify-between w-full px-4 text-sm">
@@ -51,17 +51,16 @@ function onDelete() {
         </div>
       </div>
     </UiTopbar>
-    <div class="flex flex-col flex-grow">
-      <RecordsGroup
-        v-for="(v, k) in taskRecordsGroupedByCreatedDate"
-        :key="k"
-        :date="k"
-        :records="v"
-        class="flex flex-col flex-grow"
+    <div>
+      <PerfectScrollbar
+        data-scroll
+        class="h-[calc(100vh-50px)] overflow-y-auto"
       >
-        <PerfectScrollbar
-          data-scroll
-          class="flex-grow h-1"
+        <RecordsGroup
+          v-for="(v, k) in taskRecordsGroupedByCreatedDate"
+          :key="k"
+          :date="k"
+          :records="v"
         >
           <ContextMenu.Root @update:open="onOpen">
             <ContextMenu.Trigger>
@@ -82,8 +81,8 @@ function onDelete() {
               </ContextMenu.Item>
             </ContextMenu.Content>
           </ContextMenu.Root>
-        </PerfectScrollbar>
-      </RecordsGroup>
+        </RecordsGroup>
+      </PerfectScrollbar>
     </div>
     <Dialog.Root
       :open="isConfirmOpen"
