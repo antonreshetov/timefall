@@ -5,7 +5,7 @@
 
 @layer {
   .ps__rail-y {
-    @apply !bg-transparent;
+    @apply !bg-transparent !z-50;
   }
 
   .ps__thumb-y {

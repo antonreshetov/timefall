@@ -34,7 +34,7 @@ watchEffect(() => {
 <template>
   <div
     data-tracking-item
-    class="grid grid-cols-[60px_1fr_100px] gap-2 px-4 py-2 border-b border-neutral-200 dark:border-neutral-700 last:border-none relative -z-10"
+    class="grid grid-cols-[60px_1fr_100px] gap-2 px-4 py-2 border-b border-neutral-200 dark:border-neutral-700 last:border-none"
     :class="[
       contextRecordId === data.id
         ? 'bg-neutral-100 dark:bg-neutral-800 '
