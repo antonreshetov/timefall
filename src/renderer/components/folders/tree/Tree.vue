@@ -40,7 +40,7 @@ function onUpdate(data: any) {
 function onDrop(e: DragEvent, node: Node) {
   const taskId = e.dataTransfer.getData('taskId')
 
-  api.updateTask(taskId, { folderId: node.id })
+  api.moveTaskToFolder(taskId, node.id)
 
   getTasks()
   getTaskRecords()

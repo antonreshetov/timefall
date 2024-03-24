@@ -60,6 +60,7 @@ export interface TaskApi {
   deleteTaskRecord: (id: string) => void
   getTaskRecords: () => TaskRecordWithInfo[]
   getTasks: () => TaskWithRecords[]
+  moveTaskToFolder: (taskId: string, folderId: string) => void
   updateTask: (id: string, task: Partial<Omit<Task, 'id'>>) => void
   updateTaskRecord: (id: string, item: Partial<Omit<TaskRecord, 'id'>>) => void
   updateTaskRecordDuration: (id: string, duration: number) => void

@@ -140,6 +140,28 @@ export const api: TaskApi = {
     store.set('tasks', tasks)
   },
 
+  moveTaskToFolder(taskId, folderId) {
+    const tasks = store.get('tasks') as Task[]
+    const folders = store.get('folders') as Folder[]
+
+    const task = tasks.find(t => t.id === taskId)
+    const folder = folders.find(f => f.id === folderId)
+
+    if (!task || !folder)
+      return
+
+    const oldFolder = folders.find(f => f.id === task.folderId)
+
+    if (oldFolder)
+      oldFolder.taskIds = oldFolder.taskIds.filter(id => id !== taskId)
+
+    folder.taskIds.push(taskId)
+    task.folderId = folderId
+
+    store.set('tasks', tasks)
+    store.set('folders', folders)
+  },
+
   deleteTask(id) {
     const tasks = store.get('tasks') as Task[]
     const taskIndex = tasks.findIndex(t => t.id === id)
