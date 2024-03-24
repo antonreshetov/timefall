@@ -102,9 +102,11 @@ export const api: TaskApi = {
 
       return {
         ...item,
-        taskName: task?.name,
+        taskName: task.name,
         folderName: folder?.name,
-        color: task?.color,
+        color: task.color,
+        hourRate: task.hourRate,
+        cost: (task.hourRate * item.duration) / 3600,
       }
     })
 

@@ -40,9 +40,10 @@ export interface TaskRecord {
 }
 
 export interface TaskRecordWithInfo extends TaskRecord {
-  taskName?: string
+  taskName: string
   folderName?: string
-  color?: string
+  color: string
+  cost: number
 }
 
 export interface FolderApi {
