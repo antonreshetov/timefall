@@ -17,6 +17,7 @@ const {
   getTasks,
   addTask,
   editTaskId,
+  editTask,
   contextTaskId,
   deleteTask,
   isOpenEditMenu,
@@ -163,7 +164,10 @@ getTasks()
       @update:open="isConfirmOpen = !isConfirmOpen"
     >
       <Dialog.Content class="w-[300px]">
-        <Dialog.Title>Are you sure you want to remove this task?</Dialog.Title>
+        <Dialog.Title>
+          Are you sure you want to delete "{{ editTask.name }}"
+          task?
+        </Dialog.Title>
         <UiButton
           variant="primary"
           @click="onDelete"

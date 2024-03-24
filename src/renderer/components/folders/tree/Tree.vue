@@ -21,6 +21,7 @@ const {
   isOpenEditMenu,
   contextFolderId,
   editFolderId,
+  editFolder,
   selectedFolderId,
 } = useFolders()
 const { getTasks } = useTasks()
@@ -135,7 +136,11 @@ getFolders()
     @update:open="isConfirmOpen = !isConfirmOpen"
   >
     <Dialog.Content class="w-[300px]">
-      <Dialog.Title>Are you sure you want to remove this folder?</Dialog.Title>
+      <Dialog.Title>
+        Are you sure you want to delete "{{ editFolder.name }}"
+        folder?
+      </Dialog.Title>
+      <span>Tasks will not be deleted.</span>
       <UiButton
         variant="primary"
         @click="onDelete"

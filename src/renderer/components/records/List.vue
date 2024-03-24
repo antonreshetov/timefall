@@ -89,7 +89,7 @@ function onDelete() {
       @update:open="isConfirmOpen = !isConfirmOpen"
     >
       <Dialog.Content class="w-[300px]">
-        <Dialog.Title>Are you sure you want to remove this entry?</Dialog.Title>
+        <Dialog.Title>Are you sure you want to delete this entry?</Dialog.Title>
         <UiButton
           variant="primary"
           @click="onDelete"
