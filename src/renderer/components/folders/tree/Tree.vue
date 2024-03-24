@@ -137,8 +137,7 @@ getFolders()
   >
     <Dialog.Content class="w-[300px]">
       <Dialog.Title>
-        Are you sure you want to delete "{{ editFolder.name }}"
-        folder?
+        Are you sure you want to delete "{{ editFolder?.name }}" folder?
       </Dialog.Title>
       <span>Tasks will not be deleted.</span>
       <UiButton

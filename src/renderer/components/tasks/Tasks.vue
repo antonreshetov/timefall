@@ -165,8 +165,7 @@ getTasks()
     >
       <Dialog.Content class="w-[300px]">
         <Dialog.Title>
-          Are you sure you want to delete "{{ editTask.name }}"
-          task?
+          Are you sure you want to delete "{{ editTask?.name }}" task?
         </Dialog.Title>
         <UiButton
           variant="primary"
