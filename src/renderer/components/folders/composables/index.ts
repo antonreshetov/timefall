@@ -20,9 +20,6 @@ function addFolder(folder: Pick<Folder, 'name'>) {
 
 function getFolders() {
   folders.value = api.getFolders()
-  folders.value.sort((a, b) =>
-    a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1,
-  )
 }
 
 function updateFolders(data: any) {

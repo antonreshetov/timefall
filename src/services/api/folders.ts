@@ -21,7 +21,12 @@ export const api: FolderApi = {
 
   getFolders: () => {
     const folders = store.get('folders') as Folder[]
-    return folders
+    return folders.sort((a, b) => {
+      if (a.name.toLowerCase() === b.name.toLowerCase())
+        return a.createdAt - b.createdAt
+
+      return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+    })
   },
 
   updateFolders: (folders) => {
