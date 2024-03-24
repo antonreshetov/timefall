@@ -31,7 +31,7 @@ function onOpen(bool: boolean) {
 }
 
 function onDelete() {
-  if (currentTaskItemId.value === editRecordId.value)
+  if (currentTaskItemId.value && currentTaskItemId.value === editRecordId.value)
     stop()
 
   deleteTaskRecord(editRecordId.value)

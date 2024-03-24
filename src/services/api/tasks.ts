@@ -186,11 +186,17 @@ export const api: TaskApi = {
   deleteTaskRecord(id) {
     const items = store.get('taskRecords') as TaskRecord[]
     const index = items.findIndex(i => i.id === id)
+    const tasks = store.get('tasks') as Task[]
+    const task = tasks.find(t => t.recordIds.includes(id))
 
     if (index === -1)
       return
 
+    if (task)
+      task.recordIds = task.recordIds.filter(i => i !== id)
+
     items.splice(index, 1)
     store.set('taskRecords', items)
+    store.set('tasks', tasks)
   },
 }
