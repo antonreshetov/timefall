@@ -3,7 +3,7 @@ import type { TaskWithRecords } from '~/services/api/types'
 import { timeFormat } from '@/utils'
 import { useFolders } from '@/components/folders/composables'
 
-const { api, store } = window.electron
+const { api, store, tray } = window.electron
 
 const { selectedFolderId } = useFolders()
 
@@ -69,6 +69,20 @@ function stop() {
   currentTaskId.value = undefined
 }
 
+function startStop(id: string) {
+  if (!id)
+    return
+
+  if (!isStarted.value) {
+    start(id)
+    tray.startTimer()
+  }
+  else {
+    stop()
+    tray.stopTimer()
+  }
+}
+
 function getTasks() {
   tasks.value = api.getTasks()
 }
@@ -110,6 +124,7 @@ export function useTasks() {
     lastTask,
     sec,
     start,
+    startStop,
     stop,
     tasks,
     timeFormatted,

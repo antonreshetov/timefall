@@ -1,11 +1,25 @@
 /* eslint-disable node/prefer-global/process */
 import path from 'node:path'
-import { BrowserWindow, app, nativeTheme } from 'electron'
+import {
+  BrowserWindow,
+  Menu,
+  Tray,
+  app,
+  ipcMain,
+  nativeImage,
+  nativeTheme,
+} from 'electron'
 import { store } from './services/store'
+import { timeFormat } from './renderer/utils'
 
 const isDev = process.env.NODE_ENV === 'development'
 
 let mainWindow: BrowserWindow
+let tray: Tray
+let timer: NodeJS.Timeout
+let sec = 0
+
+let isTimerActive = false
 let isQuitting = false
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -55,7 +69,43 @@ function createWindow() {
   })
 }
 
-app.on('ready', createWindow)
+function createTrayMenu() {
+  return Menu.buildFromTemplate([
+    {
+      label: isTimerActive ? 'Stop' : 'Start',
+      click: () =>
+        isTimerActive
+          ? mainWindow.webContents.send('stop')
+          : mainWindow.webContents.send('start'),
+    },
+    {
+      type: 'separator',
+    },
+    {
+      label: 'Quit',
+      click: () => {
+        isQuitting = true
+        app.quit()
+      },
+    },
+  ])
+}
+
+function createTray() {
+  tray = new Tray(nativeImage.createFromDataURL(''))
+
+  tray.setTitle('00:00:00')
+  tray.setContextMenu(createTrayMenu())
+
+  tray.on('click', () => mainWindow.show())
+}
+
+app.on('ready', () => {
+  createWindow()
+
+  if (process.platform === 'darwin')
+    createTray()
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin')
@@ -69,3 +119,29 @@ app.on('before-quit', () => {
 app.on('activate', () => {
   mainWindow.show()
 })
+
+if (process.platform === 'darwin') {
+  ipcMain.on('tray-start-timer', () => {
+    isTimerActive = true
+
+    tray.setContextMenu(createTrayMenu())
+
+    timer = setInterval(() => {
+      sec++
+
+      tray.setTitle(timeFormat(sec), {
+        fontType: 'monospacedDigit',
+      })
+    }, 1000)
+  })
+
+  ipcMain.on('tray-stop-timer', () => {
+    clearInterval(timer)
+
+    sec = 0
+    isTimerActive = false
+
+    tray.setTitle('00:00:00')
+    tray.setContextMenu(createTrayMenu())
+  })
+}

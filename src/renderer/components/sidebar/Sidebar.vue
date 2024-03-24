@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { nextTick, onMounted, ref, watchEffect } from 'vue'
+import { nextTick, ref, watchEffect } from 'vue'
 import { Plus } from 'lucide-vue-next'
 import type PS from 'perfect-scrollbar'
 import { useTasks } from '@/components/tasks/composables'
 import { useFolders } from '@/components/folders/composables'
+import { useRecords } from '@/components/records/composables'
 import { useApp, useGutter } from '@/composables'
 import { APP_DEFAULTS } from '~/services/store/constants'
 import SolarPlayBold from '~icons/solar/play-bold'
 import SolarPauseBold from '~icons/solar/pause-bold'
 
-const { store } = window.electron
+const { store, tray } = window.electron
 
-const { lastTask, start, stop, isStarted, timeFormatted } = useTasks()
+const { lastTask, isStarted, timeFormatted, startStop } = useTasks()
 const { addFolder } = useFolders()
+const { getTaskRecords } = useRecords()
 
 const sidebarRef = ref<HTMLElement>()
 const gutterRef = ref<{ $el: HTMLElement }>()
@@ -39,9 +41,22 @@ function onUpdateFolders() {
   nextTick(() => scrollRef.value.update())
 }
 
+function onStartStop() {
+  startStop(lastTask.value.id)
+  getTaskRecords()
+}
+
 watchEffect(() => {
   sidebarWidth.value = `${width.value}px`
   store.app.set('sizes.sidebar', width.value)
+})
+
+tray.onStop(() => {
+  onStartStop()
+})
+
+tray.onStart(() => {
+  onStartStop()
 })
 </script>
 
@@ -49,12 +64,12 @@ watchEffect(() => {
   <div
     ref="sidebarRef"
     data-sidebar
-    class="flex flex-col _px-2 pb-2 bg-neutral-100 dark:bg-neutral-800 select-none relative"
+    class="flex flex-col pb-2 bg-neutral-100 dark:bg-neutral-800 select-none relative"
   >
     <UiTopbar class="bg-neutral-100 dark:bg-neutral-800" />
     <SidebarMenu class="pb-2 px-2" />
     <div
-      class="flex w-full items-center justify-between _pl-1 px-2 pl-3 text-[10px] uppercase dark:text-neutral-400"
+      class="flex w-full items-center justify-between px-2 pl-3 text-[10px] uppercase dark:text-neutral-400"
     >
       Folders
       <UiButton
@@ -77,17 +92,18 @@ watchEffect(() => {
           v-if="lastTask"
           class="flex items-center gap-2 bg-white dark:bg-neutral-700 rounded px-2 py-1 dark:text-white"
         >
-          <div class="flex justify-center w-[25px] flex-shrink-0">
+          <div
+            class="flex justify-center w-[25px] flex-shrink-0"
+            @click="onStartStop"
+          >
             <SolarPlayBold
               v-if="!isStarted"
               class="w-5 h-5"
               :style="{ color: lastTask.color }"
-              @click="start(lastTask.id)"
             />
             <SolarPauseBold
               v-else
               class="w-4 h-4"
-              @click="stop"
             />
           </div>
           <div>
