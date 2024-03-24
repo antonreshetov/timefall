@@ -1,11 +1,8 @@
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 import { format } from 'date-fns'
-import { useTasks } from '@/components/tasks/composables'
 import type { TaskRecordWithInfo } from '~/services/api/types'
 
 const { api } = window.electron
-
-const { isStarted } = useTasks()
 
 const taskRecords = shallowRef<TaskRecordWithInfo[]>([])
 const editRecordId = ref<string>()
@@ -46,10 +43,6 @@ function deleteTaskRecord(id: string) {
   api.deleteTaskRecord(id)
   getTaskRecords()
 }
-
-watch(isStarted, () => {
-  getTaskRecords()
-})
 
 export function useRecords() {
   return {

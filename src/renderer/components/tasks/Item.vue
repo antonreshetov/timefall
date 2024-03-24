@@ -7,6 +7,7 @@ import SolarPauseBold from '~icons/solar/pause-bold'
 import { useTasks } from '@/components/tasks/composables'
 import { timeFormat } from '@/utils'
 import * as Popover from '@/components/ui/shadcn/popover'
+import { useRecords } from '@/components/records/composables'
 
 interface Props {
   id: string
@@ -27,16 +28,19 @@ const {
   isOpenEditMenu,
   editTaskId,
 } = useTasks()
+const { getTaskRecords } = useRecords()
 
 const isStarted = computed(() => currentTaskId.value === props.id)
 const isOpen = computed(
   () => isOpenEditMenu.value && editTaskId.value === props.id,
 )
 
-function onClick() {
+function onStartStop() {
   if (!isStarted.value)
     start(props.id)
   else stop()
+
+  getTaskRecords()
 }
 
 function onUpdateOpen(bool: boolean) {
@@ -86,7 +90,7 @@ watchEffect(() => {
     <div class="flex items-center gap-2 flex-grow">
       <div
         class="flex-shrink-0 p-2 relative"
-        @click="onClick"
+        @click="onStartStop"
       >
         <SolarPlayBold
           v-if="!isStarted"
