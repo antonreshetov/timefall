@@ -15,4 +15,11 @@ contextBridge.exposeInMainWorld('electron', {
       delete: (name: keyof AppStore) => store.app.delete(name),
     },
   },
+  tray: {
+    startTimer: () => ipcRenderer.send('tray-start-timer'),
+    stopTimer: () => ipcRenderer.send('tray-stop-timer'),
+    setTime: (time: number) => ipcRenderer.send('tray-set-time', time),
+    onStart: (callback: () => void) => ipcRenderer.on('start', callback),
+    onStop: (callback: () => void) => ipcRenderer.on('stop', callback),
+  },
 })

@@ -20,13 +20,12 @@ const props = defineProps<Props>()
 const isDark = usePreferredDark()
 
 const {
-  start,
-  stop,
   currentTaskId,
   sec,
   contextTaskId,
   isOpenEditMenu,
   editTaskId,
+  startStop,
 } = useTasks()
 const { getTaskRecords } = useRecords()
 
@@ -36,10 +35,7 @@ const isOpen = computed(
 )
 
 function onStartStop() {
-  if (!isStarted.value)
-    start(props.id)
-  else stop()
-
+  startStop(props.id)
   getTaskRecords()
 }
 

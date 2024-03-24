@@ -6,6 +6,13 @@ declare global {
     electron: {
       api: Api
       store: Store
+      tray: {
+        startTimer: () => void
+        stopTimer: () => void
+        setTime: (time: number) => void
+        onStart: (callback: () => void) => void
+        onStop: (callback: () => void) => void
+      }
     }
   }
 }
