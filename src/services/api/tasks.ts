@@ -166,15 +166,21 @@ export const api: TaskApi = {
     const tasks = store.get('tasks') as Task[]
     const taskIndex = tasks.findIndex(t => t.id === id)
     const taskRecords = store.get('taskRecords') as TaskRecord[]
+    const folders = store.get('folders') as Folder[]
+    const folder = folders.find(f => f.taskIds.includes(id))
 
     if (taskIndex === -1)
       return
+
+    if (folder)
+      folder.taskIds = folder.taskIds.filter(i => i !== id)
 
     const records = taskRecords.filter(item => item.taskId !== id)
 
     tasks.splice(taskIndex, 1)
     store.set('tasks', tasks)
     store.set('taskRecords', records)
+    store.set('folders', folders)
   },
 
   deleteTaskRecord(id) {
