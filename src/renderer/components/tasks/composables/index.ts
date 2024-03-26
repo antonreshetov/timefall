@@ -17,6 +17,7 @@ const currentTaskItemId = ref<string>()
 const editTaskId = ref<string>()
 const lastTaskId = ref<string>(store.app.get('lastTaskId'))
 const contextTaskId = ref<string>()
+const selectedTaskId = ref<string>()
 const isStarted = ref(false)
 const isOpenEditMenu = ref(false)
 
@@ -30,6 +31,10 @@ const lastTask = computed(() => {
 
 const editTask = computed(() => {
   return tasks.value.find(t => t.id === editTaskId.value)
+})
+
+const selectedTask = computed(() => {
+  return tasks.value.find(t => t.id === selectedTaskId.value)
 })
 
 const filteredTasks = computed(() => {
@@ -123,6 +128,8 @@ export function useTasks() {
     isStarted,
     lastTask,
     sec,
+    selectedTask,
+    selectedTaskId,
     start,
     startStop,
     stop,

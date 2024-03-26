@@ -59,7 +59,7 @@ export interface TaskApi {
   addTaskRecord: (item: Pick<TaskRecord, 'taskId'>) => string
   deleteTask: (id: string) => void
   deleteTaskRecord: (id: string) => void
-  getTaskRecords: () => TaskRecordWithInfo[]
+  getTaskRecords: (taskIds?: string[]) => TaskRecordWithInfo[]
   getTasks: () => TaskWithRecords[]
   moveTaskToFolder: (taskId: string, folderId: string) => void
   updateTask: (id: string, task: Partial<Omit<Task, 'id'>>) => void

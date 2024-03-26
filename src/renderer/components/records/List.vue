@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { X } from 'lucide-vue-next'
 import { useRecords } from '@/components/records/composables'
 import { useTasks } from '@/components/tasks/composables'
+import { useFolders } from '@/components/folders/composables'
 import * as ContextMenu from '@/components/ui/shadcn/context-menu'
 import * as Dialog from '@/components/ui/shadcn/dialog'
 
@@ -13,10 +15,8 @@ const {
   isOpenEditMenu,
   deleteTaskRecord,
 } = useRecords()
-
-const { stop, currentTaskItemId } = useTasks()
-
-getTaskRecords()
+const { stop, currentTaskItemId, selectedTaskId, selectedTask } = useTasks()
+const { selectedFolder } = useFolders()
 
 const isConfirmOpen = ref(false)
 
@@ -37,6 +37,16 @@ function onDelete() {
   deleteTaskRecord(editRecordId.value)
   isConfirmOpen.value = false
 }
+
+getTaskRecords()
+
+watch(selectedTask, () => {
+  getTaskRecords()
+})
+
+watch(selectedFolder, () => {
+  getTaskRecords()
+})
 </script>
 
 <template>
@@ -46,7 +56,27 @@ function onDelete() {
   >
     <UiTopbar>
       <div class="flex justify-between w-full px-4 text-sm">
-        <div class="">
+        <div
+          v-if="selectedTask"
+          class="flex items-center gap-2"
+        >
+          <UiButton
+            variant="ghost"
+            @click="selectedTaskId = undefined"
+          >
+            <X class="w-4 h-4" />
+          </UiButton>
+          <div class="flex items-center gap-2">
+            <div class="text-sm">
+              {{ selectedTask.name }}
+            </div>
+            <div class="text-sm text-neutral-400 dark:text-neutral-500">
+              ({{ selectedTask.recordIds.length }}
+              {{ selectedTask.recordIds.length <= 1 ? "item" : "items" }})
+            </div>
+          </div>
+        </div>
+        <div v-else>
           Time Entries
         </div>
       </div>

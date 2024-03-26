@@ -24,7 +24,7 @@ const {
   editFolder,
   selectedFolderId,
 } = useFolders()
-const { getTasks } = useTasks()
+const { getTasks, selectedTaskId } = useTasks()
 const { getTaskRecords } = useRecords()
 
 const api = window.electron.api
@@ -45,6 +45,7 @@ function onDrop(e: DragEvent, node: Node) {
 
   getTasks()
   getTaskRecords()
+  getFolders()
 }
 
 function onDragStart(e: DragEvent) {
@@ -61,6 +62,11 @@ function onDragStart(e: DragEvent) {
 function onContextMenu(id: string) {
   editFolderId.value = id
   contextFolderId.value = id
+}
+
+function onClick(id: string) {
+  selectedFolderId.value = id
+  selectedTaskId.value = undefined
 }
 
 function onOpen(bool: boolean) {
@@ -98,7 +104,7 @@ getFolders()
           <FoldersTreeItem :node="node">
             <div
               class="flex items-center gap-1 py-[2px]"
-              @click="selectedFolderId = node.id"
+              @click="onClick(node.id)"
               @drop="onDrop($event, node)"
               @contextmenu="onContextMenu(node.id)"
             >

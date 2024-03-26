@@ -91,12 +91,16 @@ export const api: TaskApi = {
     return tasks
   },
 
-  getTaskRecords: () => {
+  getTaskRecords: (taskIds?: string[]) => {
     const tasks = store.get('tasks') as Task[]
     const folders = store.get('folders') as Folder[]
-    const items = store.get('taskRecords') as TaskRecord[]
+    const records = store.get('taskRecords') as TaskRecord[]
 
-    const taskRecords = items.map((item) => {
+    const recordsFiltered = taskIds
+      ? records.filter(i => taskIds.includes(i.taskId))
+      : records
+
+    const taskRecords = recordsFiltered.map((item) => {
       const task = tasks.find(t => t.id === item.taskId)
       const folder = folders.find(f => f.id === task.folderId)
 

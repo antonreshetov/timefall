@@ -1,13 +1,26 @@
-import { computed, ref, shallowRef } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import { format } from 'date-fns'
 import type { TaskRecordWithInfo } from '~/services/api/types'
+import { useFolders } from '@/components/folders/composables'
+import { useTasks } from '@/components/tasks/composables'
 
 const { api } = window.electron
+
+const { selectedFolder } = useFolders()
+const { selectedTask } = useTasks()
 
 const taskRecords = shallowRef<TaskRecordWithInfo[]>([])
 const editRecordId = ref<string>()
 const contextRecordId = ref<string>()
 const isOpenEditMenu = ref(false)
+
+const selectedTaskIds = computed(() => {
+  if (selectedTask.value)
+    return [selectedTask.value.id]
+
+  if (selectedFolder.value)
+    return selectedFolder.value.taskIds
+})
 
 const editRecord = computed(() => {
   return taskRecords.value.find(r => r.id === editRecordId.value)
@@ -35,8 +48,11 @@ const taskRecordsGroupedByCreatedDate = computed(() => {
   )
 })
 
-function getTaskRecords() {
-  taskRecords.value = api.getTaskRecords()
+function getTaskRecords(taskIds?: string[]) {
+  if (!taskIds)
+    taskIds = selectedTaskIds.value
+
+  taskRecords.value = api.getTaskRecords(taskIds)
 }
 
 function deleteTaskRecord(id: string) {
