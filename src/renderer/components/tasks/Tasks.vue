@@ -24,9 +24,10 @@ const {
   stop,
   currentTaskId,
   filteredTasks,
+  selectedTaskId,
 } = useTasks()
 const { getTaskRecords } = useRecords()
-const { selectedFolderId } = useFolders()
+const { selectedFolderId, getFolders } = useFolders()
 const { tasksWidth, sidebarWidth, tasksWidthOffset } = useApp()
 
 const tasksRef = ref<HTMLElement>()
@@ -53,13 +54,25 @@ function onOpen(bool: boolean) {
     contextTaskId.value = ''
 }
 
-function onClick(id: string) {
+function onContextMenu(id: string) {
   editTaskId.value = id
   contextTaskId.value = id
 }
 
+function onClick(id: string) {
+  selectedTaskId.value = id
+}
+
+function onClickAllTasks() {
+  selectedTaskId.value = ''
+  selectedFolderId.value = ''
+}
+
 function onAddTask() {
   addTask(selectedFolderId.value)
+
+  getFolders()
+  getTaskRecords()
 
   const scrollEl = tasksRef.value.querySelector('[data-scroll]')
   nextTick(() => {
@@ -110,7 +123,7 @@ getTasks()
       >
         <UiButton
           variant="ghost"
-          @click="selectedFolderId = ''"
+          @click="onClickAllTasks"
         >
           All Tasks
         </UiButton>
@@ -139,7 +152,8 @@ getTasks()
               :draggable="true"
               :duration="taskTotalDuration(i.records)"
               @dragstart="onDragStart($event, i.id)"
-              @contextmenu="onClick(i.id)"
+              @click="onClick(i.id)"
+              @contextmenu="onContextMenu(i.id)"
             />
           </ContextMenu.Trigger>
           <ContextMenu.Content>

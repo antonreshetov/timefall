@@ -13,6 +13,10 @@ const editFolder = computed(() => {
   return folders.value.find(folder => folder.id === editFolderId.value)
 })
 
+const selectedFolder = computed(() => {
+  return folders.value.find(folder => folder.id === selectedFolderId.value)
+})
+
 function addFolder(folder: Pick<Folder, 'name'>) {
   api.addFolder(folder)
   getFolders()
@@ -34,12 +38,13 @@ export function useFolders() {
   return {
     addFolder,
     contextFolderId,
-    selectedFolderId,
+    editFolder,
     editFolderId,
     folders,
     getFolders,
-    editFolder,
     isOpenEditMenu,
+    selectedFolder,
+    selectedFolderId,
     updateFolders,
   }
 }

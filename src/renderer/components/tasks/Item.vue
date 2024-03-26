@@ -5,9 +5,9 @@ import { usePreferredDark } from '@vueuse/core'
 import SolarPlayBold from '~icons/solar/play-bold'
 import SolarPauseBold from '~icons/solar/pause-bold'
 import { useTasks } from '@/components/tasks/composables'
+import { useRecords } from '@/components/records/composables'
 import { timeFormat } from '@/utils'
 import * as Popover from '@/components/ui/shadcn/popover'
-import { useRecords } from '@/components/records/composables'
 
 interface Props {
   id: string
@@ -26,6 +26,7 @@ const {
   isOpenEditMenu,
   editTaskId,
   startStop,
+  selectedTaskId,
 } = useTasks()
 const { getTaskRecords } = useRecords()
 
@@ -76,7 +77,9 @@ watchEffect(() => {
     data-task-item
     class="flex items-center gap-2 py-2 px-4 mx-2 rounded"
     :class="[
-      contextTaskId === id ? 'bg-neutral-100 dark:bg-neutral-800 ' : null,
+      contextTaskId === id || selectedTaskId === id
+        ? 'bg-neutral-100 dark:bg-neutral-800 '
+        : null,
     ]"
     :style="{
       backgroundColor: isStarted ? color : null,
@@ -86,7 +89,7 @@ watchEffect(() => {
     <div class="flex items-center gap-2 flex-grow">
       <div
         class="flex-shrink-0 p-2 relative"
-        @click="onStartStop"
+        @click.stop="onStartStop"
       >
         <SolarPlayBold
           v-if="!isStarted"
