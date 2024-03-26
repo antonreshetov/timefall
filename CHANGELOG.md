@@ -1,3 +1,30 @@
+# [0.4.0](https://github.com/antonreshetov/timefall/compare/v0.3.0...v0.4.0) (2024-03-26)
+
+
+### Bug Fixes
+
+* delete dialog ([f7af160](https://github.com/antonreshetov/timefall/commit/f7af160fa2cdce200be850af1f73f5954435ecfa))
+* delete task ([8c0f2ca](https://github.com/antonreshetov/timefall/commit/8c0f2ca2788c5edce7d3475ce860ce23da654988))
+* delete task records ([fa9a3bf](https://github.com/antonreshetov/timefall/commit/fa9a3bfb9409da1183616cdd875f117a9ddd5692))
+* folders sort ([d068cc7](https://github.com/antonreshetov/timefall/commit/d068cc7afe09def137c3c2a0bfa11701f6bbbb7e))
+* get random colors for task ([1d998d6](https://github.com/antonreshetov/timefall/commit/1d998d67e7c678b12b35644219f1abfe1316a50b))
+* get task records on start/stop ([229295b](https://github.com/antonreshetov/timefall/commit/229295bcb82604f5d5ad7ff7aa19c2176e9e6dc8))
+* move task to folder ([27238b1](https://github.com/antonreshetov/timefall/commit/27238b1cc02a82d3541783683077ac7b96c8d553))
+* scroll in time entries column ([#11](https://github.com/antonreshetov/timefall/issues/11)) ([19d0b82](https://github.com/antonreshetov/timefall/commit/19d0b8222347b6561423608255687f2fa8a0a03b))
+
+
+### Features
+
+* add custom scrollbar ([#10](https://github.com/antonreshetov/timefall/issues/10)) ([904460b](https://github.com/antonreshetov/timefall/commit/904460b8fd21a8bbd7ba245d1473f45a576c723e))
+* add folders ([#9](https://github.com/antonreshetov/timefall/issues/9)) ([e15f1db](https://github.com/antonreshetov/timefall/commit/e15f1db2b095cfee5cbf327e1e76d05008f18d0b))
+* add tasks entries filter ([#14](https://github.com/antonreshetov/timefall/issues/14)) ([d52d5e0](https://github.com/antonreshetov/timefall/commit/d52d5e003964c726f79dc382f7f9150bc24faffa))
+* add tray ([#13](https://github.com/antonreshetov/timefall/issues/13)) ([8ae5951](https://github.com/antonreshetov/timefall/commit/8ae595109643415118a1ad239bfbb9f09cdd35e3))
+* hide app instead of recreate ([72465b6](https://github.com/antonreshetov/timefall/commit/72465b60fb244607a4df320f2f32117d9b176354))
+* store last task & selected folder ids ([0a27a33](https://github.com/antonreshetov/timefall/commit/0a27a33c3c1cf43d07e2b06c7484e78501952bc8))
+* tasks cost calculation ([#12](https://github.com/antonreshetov/timefall/issues/12)) ([99f9994](https://github.com/antonreshetov/timefall/commit/99f9994bec01efa3df041b19733bb4b6670ae896))
+
+
+
 # [0.3.0](https://github.com/antonreshetov/timefall/compare/v0.2.0...v0.3.0) (2024-02-15)
 
 
