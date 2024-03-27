@@ -9,8 +9,10 @@ import {
   nativeImage,
   nativeTheme,
 } from 'electron'
+import { author } from '../package.json'
 import { store } from './services/store'
 import { timeFormat } from './renderer/utils'
+import { menu } from './menu'
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -41,6 +43,8 @@ function createWindow() {
       nodeIntegration: true,
     },
   })
+
+  Menu.setApplicationMenu(menu)
 
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL)
@@ -143,5 +147,11 @@ if (process.platform === 'darwin') {
 
     tray.setTitle('00:00:00')
     tray.setContextMenu(createTrayMenu())
+  })
+
+  app.setAboutPanelOptions({
+    applicationName: app.name,
+    applicationVersion: app.getVersion(),
+    copyright: `${author.name} ©2024-${new Date().getFullYear()}`,
   })
 }
