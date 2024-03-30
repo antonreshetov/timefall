@@ -132,7 +132,7 @@ const yAxis = computed(() => {
     const tasksRecords = taskRecordsGroupedByTaskId[taskId]
 
     series.push({
-      name: tasksRecords[0].taskName,
+      name: [tasksRecords[0].taskName, tasksRecords[0].folderName],
       color: tasksRecords[0].color,
       data: xAxis.value.map((date) => {
         const taskRecords = tasksRecords.filter((taskRecord) => {
