@@ -12,20 +12,31 @@ import {
   startOfWeek,
 } from 'date-fns'
 
-import type { TaskRecordWithInfo } from '~/services/api/types'
+import type { TaskRecordWithInfo, TaskWithRecords } from '~/services/api/types'
 
 const { api } = window.electron
 
+const tasks = shallowRef<TaskWithRecords[]>([])
 const taskRecords = shallowRef<TaskRecordWithInfo[]>([])
 
 type RangeType = 'week' | 'month' | 'year'
+type TotalType = 'rate' | 'duration'
 
 const selectedRangeType = ref<RangeType>('week')
+const selectedTotalType = ref<TotalType>('duration')
 
 const range = ref({
   start: new Date(),
   end: new Date(),
 })
+
+function getTaskRecords() {
+  taskRecords.value = api.getTaskRecords()
+}
+
+function getTasks() {
+  tasks.value = api.getTasks()
+}
 
 function setWeekRange(date?: Date) {
   selectedRangeType.value = 'week'
@@ -81,6 +92,41 @@ const taskRecordsFilteredByRange = computed(() => {
       && taskRecord.createdAt <= endOfDay(range.value.end).getTime()
     )
   })
+})
+
+const tasksFilteredByRange = computed(() => {
+  const taskIds = taskRecordsFilteredByRange.value.map(
+    taskRecord => taskRecord.taskId,
+  )
+
+  return tasks.value.filter(task => taskIds.includes(task.id))
+})
+
+const totalDuration = computed(() => {
+  return tasksFilteredByRange.value.reduce((acc, task) => {
+    const taskRecords = taskRecordsFilteredByRange.value.filter(
+      taskRecord => taskRecord.taskId === task.id,
+    )
+
+    return (
+      acc
+      + taskRecords.reduce((acc, taskRecord) => acc + taskRecord.duration, 0)
+    )
+  }, 0)
+})
+
+const totalCost = computed(() => {
+  const cost = tasksFilteredByRange.value.reduce((acc, task) => {
+    const taskRecords = taskRecordsFilteredByRange.value.filter(
+      taskRecord => taskRecord.taskId === task.id,
+    )
+
+    return (
+      acc + taskRecords.reduce((acc, taskRecord) => acc + taskRecord.cost, 0)
+    )
+  }, 0)
+
+  return cost.toFixed(2)
 })
 
 const xAxis = computed(() => {
@@ -179,16 +225,14 @@ const xAxisLabels = computed(() => {
   })
 })
 
-function getTaskRecords() {
-  taskRecords.value = api.getTaskRecords()
-}
-
 export function useReports() {
   return {
     currentYearByRange,
     getTaskRecords,
+    getTasks,
     range,
     selectedRangeType,
+    selectedTotalType,
     setMonthRange,
     setMonthRangeOffset,
     setWeekRange,
@@ -196,6 +240,9 @@ export function useReports() {
     setYearRange,
     showRangeText,
     taskRecords,
+    tasksFilteredByRange,
+    totalCost,
+    totalDuration,
     xAxis,
     xAxisLabels,
     yAxis,
