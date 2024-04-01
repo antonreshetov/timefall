@@ -99,7 +99,19 @@ const tasksFilteredByRange = computed(() => {
     taskRecord => taskRecord.taskId,
   )
 
-  return tasks.value.filter(task => taskIds.includes(task.id))
+  const filteredTasks = tasks.value.filter(task => taskIds.includes(task.id))
+
+  return filteredTasks.map((task) => {
+    const taskRecords = taskRecordsFilteredByRange.value.filter(
+      taskRecord => taskRecord.taskId === task.id,
+    )
+
+    return {
+      ...task,
+      recordsIds: taskRecords.map(taskRecord => taskRecord.id),
+      records: taskRecords,
+    }
+  })
 })
 
 const totalDuration = computed(() => {
