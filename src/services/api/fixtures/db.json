@@ -1,167 +1,402 @@
 {
-  "folders": [],
-  "tasks": [
+  "folders": [
     {
-      "name": "Side Project",
-      "folderId": "",
-      "createdAt": 1707710677061,
-      "description": "",
-      "hourRate": 0,
-      "id": "cIUAzGSi",
-      "recordIds": [
-        "NCtBkJ4I"
+      "name": "Acme Group",
+      "createdAt": 1711966475444,
+      "id": "p5ik1ZdC",
+      "parentId": "peYTYkjo",
+      "taskIds": [
+        "SBohD2TR",
+        "PMa0KK_q"
       ],
-      "updatedAt": null,
-      "color": "#ff8e00"
+      "updatedAt": 1711966658830,
+      "isOpen": false
     },
     {
-      "name": "Learning Vue",
-      "folderId": "",
-      "createdAt": 1707710677062,
+      "name": "Blog",
+      "createdAt": 1711966599135,
+      "id": "mdfRpZF0",
+      "parentId": "n6vPPOiD",
+      "taskIds": [
+        "yLBFYT8u"
+      ],
+      "updatedAt": 1711966605641,
+      "isOpen": false
+    },
+    {
+      "name": "Book",
+      "createdAt": 1711966613884,
+      "id": "Q6AQiI-p",
+      "parentId": "n6vPPOiD",
+      "taskIds": [
+        "Gwd35vi6"
+      ],
+      "updatedAt": 1711966620303,
+      "isOpen": false
+    },
+    {
+      "name": "Freelance",
+      "createdAt": 1711966435213,
+      "id": "peYTYkjo",
+      "parentId": "",
+      "taskIds": [],
+      "updatedAt": 1711966452111,
+      "isOpen": true
+    },
+    {
+      "name": "Learning",
+      "createdAt": 1711966455080,
+      "id": "t8GIX4BV",
+      "parentId": "",
+      "taskIds": [
+        "M7Pc2wt0",
+        "mgw_21N3"
+      ],
+      "updatedAt": 1711966459996,
+      "isOpen": true
+    },
+    {
+      "name": "Side Projects",
+      "createdAt": 1711966410940,
+      "id": "3RhFopul",
+      "parentId": "",
+      "taskIds": [],
+      "updatedAt": 1711966538776,
+      "isOpen": true
+    },
+    {
+      "name": "Time Tracker",
+      "createdAt": 1711966514217,
+      "id": "YGPcXeYb",
+      "parentId": "3RhFopul",
+      "taskIds": [],
+      "updatedAt": 1711966530958,
+      "isOpen": false
+    },
+    {
+      "name": "Writing",
+      "createdAt": 1711966461132,
+      "id": "n6vPPOiD",
+      "parentId": "",
+      "taskIds": [],
+      "updatedAt": 1711966596392,
+      "isOpen": true
+    }
+  ],
+  "tasks": [
+    {
+      "name": "Develop",
+      "folderId": "p5ik1ZdC",
+      "createdAt": 1711966664027,
+      "description": "",
+      "hourRate": 100,
+      "id": "SBohD2TR",
+      "recordIds": [
+        "3MMWTtle",
+        "3qz2658-",
+        "GgTLWQd7",
+        "0KKLDSCz",
+        "pSeE7YEE",
+        "bndEYr2y",
+        "NH77UpyX",
+        "AhFMPGYA"
+      ],
+      "updatedAt": 1711966687829,
+      "color": "#f90093"
+    },
+    {
+      "name": "TypeScript",
+      "folderId": "t8GIX4BV",
+      "createdAt": 1711966726242,
       "description": "",
       "hourRate": 0,
-      "id": "dtmgXt95",
+      "id": "M7Pc2wt0",
       "recordIds": [
-        "HT1jydwL",
-        "FeHNSn_k",
-        "Luc1Io7L"
+        "dWQx-I7S",
+        "2RZj1McX",
+        "frOYwQjV",
+        "9C6zEYpI"
       ],
-      "updatedAt": null,
+      "updatedAt": 1711966848269,
       "color": "#00c1f6"
     },
     {
-      "name": "Email Marketing",
-      "folderId": "",
-      "createdAt": 1707710677063,
+      "name": "Vue",
+      "folderId": "t8GIX4BV",
+      "createdAt": 1711966866302,
       "description": "",
       "hourRate": 0,
-      "id": "47cqQpnx",
+      "id": "mgw_21N3",
       "recordIds": [
-        "LkgLIpS0",
-        "1u6o5Gf4"
+        "XvYxEWEL",
+        "GaViL2rx",
+        "eDEluCoi",
+        "mhPWzg2t"
       ],
-      "updatedAt": null,
+      "updatedAt": 1711966874479,
       "color": "#00db28"
     },
     {
-      "name": "Logo Design",
-      "folderId": "",
-      "createdAt": 1707710677063,
+      "name": "Post About New Tool",
+      "folderId": "mdfRpZF0",
+      "createdAt": 1711967003150,
       "description": "",
       "hourRate": 0,
-      "id": "X54__fJ-",
+      "id": "yLBFYT8u",
       "recordIds": [
-        "VlsteJcR",
-        "mqiG0rW_"
+        "XdmAR-8n",
+        "TZCGWXbF"
       ],
-      "updatedAt": null,
-      "color": "#c23ff2"
+      "updatedAt": 1711967154784,
+      "color": "#ffca00"
     },
     {
-      "name": "Personal Blog",
-      "folderId": "",
-      "createdAt": 1707710677064,
+      "name": "First Chapter",
+      "folderId": "Q6AQiI-p",
+      "createdAt": 1711967261190,
       "description": "",
       "hourRate": 0,
-      "id": "GBL-n6EH",
+      "id": "Gwd35vi6",
       "recordIds": [
-        "tEgcd7We",
-        "92B-YvCK"
+        "CIZZa8WU",
+        "ZtZzf5D8",
+        "Njq9Qg8z"
       ],
-      "updatedAt": null,
-      "color": "#0094ff"
+      "updatedAt": 1711967276893,
+      "color": "#5654fc"
+    },
+    {
+      "name": "Design",
+      "folderId": "p5ik1ZdC",
+      "createdAt": 1711967680559,
+      "description": "",
+      "hourRate": 80,
+      "id": "PMa0KK_q",
+      "recordIds": [
+        "lwJbTRxl",
+        "MXUvA466",
+        "i0FMhkOe"
+      ],
+      "updatedAt": 1711967706734,
+      "color": "#ffca00"
     }
   ],
   "taskRecords": [
     {
-      "taskId": "X54__fJ-",
-      "createdAt": 1707710677064,
+      "taskId": "SBohD2TR",
+      "createdAt": 1711966703200,
       "description": "",
-      "duration": 1246,
+      "duration": 1806,
       "hourRate": 0,
-      "id": "VlsteJcR",
-      "updatedAt": 1707710677065
+      "id": "3MMWTtle",
+      "updatedAt": 1711966775996
     },
     {
-      "taskId": "GBL-n6EH",
-      "createdAt": 1707710677065,
+      "taskId": "M7Pc2wt0",
+      "createdAt": 1711966739886,
       "description": "",
-      "duration": 8673,
+      "duration": 3900,
       "hourRate": 0,
-      "id": "tEgcd7We",
-      "updatedAt": 1707710677066
+      "id": "dWQx-I7S",
+      "updatedAt": 1711966757010
     },
     {
-      "taskId": "X54__fJ-",
-      "createdAt": 1707710677066,
+      "taskId": "mgw_21N3",
+      "createdAt": 1711966876698,
       "description": "",
-      "duration": 9117,
+      "duration": 2040,
       "hourRate": 0,
-      "id": "mqiG0rW_",
-      "updatedAt": 1707710677067
+      "id": "XvYxEWEL",
+      "updatedAt": 1711966883839
     },
     {
-      "taskId": "47cqQpnx",
-      "createdAt": 1707710677067,
+      "taskId": "yLBFYT8u",
+      "createdAt": 1711967051550,
       "description": "",
-      "duration": 4448,
+      "duration": 2400,
       "hourRate": 0,
-      "id": "LkgLIpS0",
-      "updatedAt": 1707710677067
+      "id": "XdmAR-8n",
+      "updatedAt": 1711967064029
     },
     {
-      "taskId": "dtmgXt95",
-      "createdAt": 1707710677068,
+      "taskId": "SBohD2TR",
+      "createdAt": 1712048400000,
       "description": "",
-      "duration": 2393,
+      "duration": 5400,
       "hourRate": 0,
-      "id": "HT1jydwL",
-      "updatedAt": 1707710677068
+      "id": "3qz2658-",
+      "updatedAt": 1711967140618
     },
     {
-      "taskId": "dtmgXt95",
-      "createdAt": 1707710677068,
+      "taskId": "Gwd35vi6",
+      "createdAt": 1712048400000,
       "description": "",
-      "duration": 546,
+      "duration": 11003,
       "hourRate": 0,
-      "id": "FeHNSn_k",
-      "updatedAt": 1707710677069
+      "id": "CIZZa8WU",
+      "updatedAt": 1711967289976
     },
     {
-      "taskId": "dtmgXt95",
-      "createdAt": 1707710677069,
+      "taskId": "SBohD2TR",
+      "createdAt": 1711967528605,
       "description": "",
-      "duration": 2278,
+      "duration": 780,
       "hourRate": 0,
-      "id": "Luc1Io7L",
-      "updatedAt": 1707710677069
+      "id": "GgTLWQd7",
+      "updatedAt": 1711967616014
     },
     {
-      "taskId": "cIUAzGSi",
-      "createdAt": 1707710677069,
+      "taskId": "PMa0KK_q",
+      "createdAt": 1712005200000,
       "description": "",
-      "duration": 428,
+      "duration": 2401,
       "hourRate": 0,
-      "id": "NCtBkJ4I",
-      "updatedAt": 1707710677070
+      "id": "lwJbTRxl",
+      "updatedAt": 1711967697722
     },
     {
-      "taskId": "GBL-n6EH",
-      "createdAt": 1707710677070,
+      "taskId": "yLBFYT8u",
+      "createdAt": 1711967897459,
       "description": "",
-      "duration": 2562,
+      "duration": 2680,
       "hourRate": 0,
-      "id": "92B-YvCK",
-      "updatedAt": 1707710677071
+      "id": "TZCGWXbF",
+      "updatedAt": 1711967918653
     },
     {
-      "taskId": "47cqQpnx",
-      "createdAt": 1707710677071,
+      "taskId": "mgw_21N3",
+      "createdAt": 1712055600000,
       "description": "",
-      "duration": 4324,
+      "duration": 7200,
       "hourRate": 0,
-      "id": "1u6o5Gf4",
-      "updatedAt": 1707710677071
+      "id": "GaViL2rx",
+      "updatedAt": 1711968190385
+    },
+    {
+      "taskId": "SBohD2TR",
+      "createdAt": 1712124000000,
+      "description": "",
+      "duration": 2700,
+      "hourRate": 0,
+      "id": "0KKLDSCz",
+      "updatedAt": 1711968237104
+    },
+    {
+      "taskId": "PMa0KK_q",
+      "createdAt": 1712124000000,
+      "description": "",
+      "duration": 2080,
+      "hourRate": 0,
+      "id": "MXUvA466",
+      "updatedAt": 1711968273911
+    },
+    {
+      "taskId": "M7Pc2wt0",
+      "createdAt": 1712217600000,
+      "description": "",
+      "duration": 13200,
+      "hourRate": 0,
+      "id": "2RZj1McX",
+      "updatedAt": 1711968329469
+    },
+    {
+      "taskId": "SBohD2TR",
+      "createdAt": 1712217600000,
+      "description": "",
+      "duration": 12600,
+      "hourRate": 0,
+      "id": "pSeE7YEE",
+      "updatedAt": 1711968406234
+    },
+    {
+      "taskId": "Gwd35vi6",
+      "createdAt": 1712300400000,
+      "description": "",
+      "duration": 12600,
+      "hourRate": 0,
+      "id": "ZtZzf5D8",
+      "updatedAt": 1711968452256
+    },
+    {
+      "taskId": "SBohD2TR",
+      "createdAt": 1712300400000,
+      "description": "",
+      "duration": 9000,
+      "hourRate": 0,
+      "id": "bndEYr2y",
+      "updatedAt": 1711968479498
+    },
+    {
+      "taskId": "SBohD2TR",
+      "createdAt": 1711968605433,
+      "description": "",
+      "duration": 44,
+      "hourRate": 0,
+      "id": "NH77UpyX",
+      "updatedAt": 1711968649905
+    },
+    {
+      "taskId": "mgw_21N3",
+      "createdAt": 1711968664113,
+      "description": "",
+      "duration": 1,
+      "hourRate": 0,
+      "id": "eDEluCoi",
+      "updatedAt": 1711968665349
+    },
+    {
+      "taskId": "M7Pc2wt0",
+      "createdAt": 1711968667407,
+      "description": "",
+      "duration": 187,
+      "hourRate": 0,
+      "id": "frOYwQjV",
+      "updatedAt": 1711968857283
+    },
+    {
+      "taskId": "PMa0KK_q",
+      "createdAt": 1712397600000,
+      "description": "",
+      "duration": 9030,
+      "hourRate": 0,
+      "id": "i0FMhkOe",
+      "updatedAt": 1711969940026
+    },
+    {
+      "taskId": "mgw_21N3",
+      "createdAt": 1712397600000,
+      "description": "",
+      "duration": 2700,
+      "hourRate": 0,
+      "id": "mhPWzg2t",
+      "updatedAt": 1711969970580
+    },
+    {
+      "taskId": "SBohD2TR",
+      "createdAt": 1712397600000,
+      "description": "",
+      "duration": 4800,
+      "hourRate": 0,
+      "id": "AhFMPGYA",
+      "updatedAt": 1711970035490
+    },
+    {
+      "taskId": "Gwd35vi6",
+      "createdAt": 1712473200000,
+      "description": "",
+      "duration": 9000,
+      "hourRate": 0,
+      "id": "Njq9Qg8z",
+      "updatedAt": 1711970068773
+    },
+    {
+      "taskId": "M7Pc2wt0",
+      "createdAt": 1712473200000,
+      "description": "",
+      "duration": 6000,
+      "hourRate": 0,
+      "id": "9C6zEYpI",
+      "updatedAt": 1711970095609
     }
   ]
 }
