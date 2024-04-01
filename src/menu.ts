@@ -3,6 +3,7 @@ import os from 'node:os'
 import type { BrowserWindow, MenuItemConstructorOptions } from 'electron'
 import { Menu, dialog, shell } from 'electron'
 import { repository, version } from '../package.json'
+import { checkForUpdates } from './services/updates'
 
 const isDev = process.env.NODE_ENV === 'development'
 const isMac = process.platform === 'darwin'
@@ -41,7 +42,28 @@ const appMenuCommon: Record<string, MenuItemConstructorOptions> = {
   },
   update: {
     label: 'Check for Updates...',
-    click: () => console.warn('Check for Updates...'),
+    click: async (_, focusedWindow) => {
+      const newVersion = await checkForUpdates()
+
+      if (newVersion) {
+        const buttonId = dialog.showMessageBoxSync(focusedWindow, {
+          title: 'Update Available',
+          message: `Version ${newVersion} is available for download. Your version is ${version}.`,
+          buttons: ['Go to Download', 'OK'],
+          defaultId: 0,
+          cancelId: 1,
+        })
+
+        if (buttonId === 0)
+          shell.openExternal(`${repository.url}/releases/latest`)
+      }
+      else {
+        dialog.showMessageBox(focusedWindow, {
+          title: 'No Updates Available',
+          message: 'You are already using the latest version.',
+        })
+      }
+    },
   },
   devtools: {
     label: 'Toggle Developer Tools',

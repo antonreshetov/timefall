@@ -1,6 +1,7 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge, ipcRenderer, shell } from 'electron'
+import { repository } from '../package.json'
 import { api } from './services/api'
 import { store } from './services/store'
 import type { AppStore } from './services/store/types'
@@ -21,5 +22,12 @@ contextBridge.exposeInMainWorld('electron', {
     setTime: (time: number) => ipcRenderer.send('tray-set-time', time),
     onStart: (callback: () => void) => ipcRenderer.on('start', callback),
     onStop: (callback: () => void) => ipcRenderer.on('stop', callback),
+  },
+  updates: {
+    checkForUpdates: () => ipcRenderer.send('check-for-updates'),
+    downloadUpdate: () =>
+      shell.openExternal(`${repository.url}/releases/latest`),
+    onUpdateAvailable: (callback: () => void) =>
+      ipcRenderer.on('update-available', callback),
   },
 })
