@@ -62,9 +62,11 @@ bun run make
 ```
 
 
-## How can I help?
+## Follow
+ - News and updates on [Twitter](https://twitter.com/anton_reshetov).
+ - [Discussions](https://github.com/antonreshetov/timefall/discussions).
 
-Now a good help would be your recognition and star for the project to gain visibility on GitHub.
+![](.github/assets/subscribe.gif)
 
 ## License
 
