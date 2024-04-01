@@ -13,6 +13,11 @@ declare global {
         onStart: (callback: () => void) => void
         onStop: (callback: () => void) => void
       }
+      updates: {
+        checkForUpdates: () => void
+        downloadUpdate: () => void
+        onUpdateAvailable: (callback: () => void) => void
+      }
     }
   }
 }

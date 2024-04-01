@@ -13,6 +13,7 @@ import { author } from '../package.json'
 import { store } from './services/store'
 import { timeFormat } from './renderer/utils'
 import { menu } from './menu'
+import { checkForUpdates } from './services/updates'
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -155,3 +156,7 @@ if (process.platform === 'darwin') {
     copyright: `${author.name} ©2024-${new Date().getFullYear()}`,
   })
 }
+
+ipcMain.on('check-for-updates', () => {
+  checkForUpdates()
+})

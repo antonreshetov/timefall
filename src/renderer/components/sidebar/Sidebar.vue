@@ -10,7 +10,7 @@ import { APP_DEFAULTS } from '~/services/store/constants'
 import SolarPlayBold from '~icons/solar/play-bold'
 import SolarPauseBold from '~icons/solar/pause-bold'
 
-const { store, tray } = window.electron
+const { store, tray, updates } = window.electron
 
 const { lastTask, isStarted, timeFormatted, startStop } = useTasks()
 const { addFolder } = useFolders()
@@ -20,7 +20,7 @@ const sidebarRef = ref<HTMLElement>()
 const gutterRef = ref<{ $el: HTMLElement }>()
 const scrollRef = ref<PS>()
 
-const { sidebarWidth } = useApp()
+const { sidebarWidth, isUpdateAvailable } = useApp()
 const { width } = useGutter(
   sidebarRef,
   gutterRef,
@@ -88,6 +88,17 @@ tray.onStart(() => {
         <FoldersTree @update="onUpdateFolders" />
       </PerfectScrollbar>
       <div class="px-2">
+        <div
+          v-if="isUpdateAvailable"
+          class="flex justify-center mb-2"
+        >
+          <UiButton
+            variant="ghost-sidebar"
+            @click="updates.downloadUpdate"
+          >
+            Update available
+          </UiButton>
+        </div>
         <div
           v-if="lastTask"
           class="flex items-center gap-2 bg-white dark:bg-neutral-700 rounded px-2 py-1 dark:text-white"

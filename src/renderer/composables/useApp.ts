@@ -1,7 +1,9 @@
 import { useCssVar } from '@vueuse/core'
-import { watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 
-const { store } = window.electron
+const { store, updates } = window.electron
+
+const isUpdateAvailable = ref(false)
 
 const sidebarWidth = useCssVar('--sidebar-width')
 const tasksWidth = useCssVar('--tasks-width')
@@ -14,8 +16,22 @@ watchEffect(() => {
   tasksWidthOffset.value = `${Number.parseInt(sidebarWidth.value) + Number.parseInt(tasksWidth.value)}px`
 })
 
+updates.checkForUpdates()
+
+updates.onUpdateAvailable(() => {
+  isUpdateAvailable.value = true
+})
+
+setInterval(
+  () => {
+    updates.checkForUpdates()
+  },
+  1000 * 60 * 360,
+) // 6 часов
+
 export function useApp() {
   return {
+    isUpdateAvailable,
     sidebarWidth,
     tasksWidth,
     tasksWidthOffset,
