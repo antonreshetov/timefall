@@ -12,4 +12,27 @@
     @apply !bg-neutral-300 dark:!bg-neutral-700 w-[2px];
   }
 
+  .apexcharts-text {
+    @apply fill-neutral-500 dark:fill-neutral-400;
+  }
+
+  .apexcharts-tooltip {
+    @apply !bg-white dark:!bg-neutral-700 !border-neutral-200 dark:!border-neutral-700 !shadow-none;
+  }
+  .apexcharts-tooltip-title {
+    @apply !bg-neutral-100 dark:!bg-neutral-800 !border-none;
+  }
+  
+  .apexcharts-gridline {
+    @apply !stroke-neutral-200 dark:!stroke-neutral-700;
+  }
+
+  .apexcharts-grid-borders line {
+    @apply !stroke-neutral-200 dark:!stroke-neutral-600;
+  }
+
+  .apexcharts-xaxis-tick {
+    @apply !stroke-neutral-200 dark:!stroke-neutral-600;
+  }
+
 }

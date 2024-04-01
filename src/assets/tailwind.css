@@ -15,6 +15,12 @@
   }
 }
 
+@layer components {
+  .text-muted {
+    @apply text-neutral-400 dark:text-neutral-500;
+  }
+}
+
 :root {
   --topbar-height: 50px;
 }

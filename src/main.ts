@@ -32,9 +32,9 @@ if (require('electron-squirrel-startup'))
 function createWindow() {
   const bounds = store.app.get('bounds')
   mainWindow = new BrowserWindow({
-    width: 900,
+    width: 1000,
     height: 600,
-    minWidth: 900,
+    minWidth: 1000,
     backgroundColor: nativeTheme.shouldUseDarkColors ? '#181818' : '#fff',
     ...bounds,
     titleBarStyle: 'hidden',
