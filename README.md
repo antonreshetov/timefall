@@ -38,6 +38,46 @@ However, the amount of effort needed to maintain and develop new features for th
 
 The Timefall project is an open-source software that is being developed to provide users with an efficient and convenient time management tool. Created with modern software trends in mind, Timefall is a tool accessible to anyone who wants to better understand how they allocate their time and how it can be used most productively. It's a simple yet powerful tool capable of adapting to each user's needs.
 
+## Features
+
+### Task Creation with Hourly Rate
+
+The app allows you to create tasks and specify an hourly rate for each task. This feature is useful for tracking time and calculating payment.
+
+### Task Organization
+You can organize your tasks by grouping them into folders. This helps you easily find relevant tasks and manage them efficiently.
+
+### Time Entries Display Grouped by Days with Hourly Rate Calculation
+
+Timefall displays time entries grouped by days. You’ll see how much time was spent on each task, along with the calculated hourly payment.
+
+### Reports for Weeks, Months, and Years
+
+You can analyze your productivity by viewing reports for different time periods. This feature helps you understand how effectively you manage your time.
+
+### Privacy
+Timefall uses a simple JSON-based database stored locally on your computer, rather than in the cloud.
+
+## Who is Timefall Useful for? 
+
+### Freelancers and Self-Employed Professionals
+Freelancers working on various projects can utilize Timefall to track their billable hours accurately. Whether you’re a freelance writer, designer, developer, or consultant, this app helps you manage your time and calculate earnings.
+
+### Software Developers and Designers
+Developers and designers often juggle multiple tasks simultaneously. Timefall assists them in organizing their work, tracking time spent on coding, designing, and debugging, and ensuring efficient project management.
+
+### Consultants and Sales Agents
+Consultants, sales representatives, and agents who bill clients based on hours worked can benefit from Timefall. It simplifies time tracking, allowing them to focus on client interactions and project delivery.
+
+### Students and Researchers
+Students working on research projects, assignments, or thesis writing can use Timefall to allocate time effectively. It helps them stay on track and meet deadlines.
+
+### Project Managers and Teams
+Project managers can monitor team productivity by analyzing time entries. Timefall’s reports provide insights into resource allocation, project progress, and team performance.
+
+### Personal Time Management
+Anyone seeking better time management — whether for personal tasks, side projects, or hobbies — can leverage Timefall. It’s a versatile tool for staying organized and productive.
+
 ## Development
 
 ### Prerequisites
