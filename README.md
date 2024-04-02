@@ -21,6 +21,10 @@
   <a href="https://github.com/antonreshetov/timefall/discussions">Discussions</a>
 </p>
 
+> [!CAUTION]
+> Project is currently in an active development stage.
+> We strongly recommend using our app for familiarization purposes only at this time. This will allow you to get acquainted with the main features and capabilities of our project, without risking the occurrence of unexpected situations.
+
 ## Support
 
 Timefall is open source project and completely free to use.
@@ -47,7 +51,7 @@ The app allows you to create tasks and specify an hourly rate for each task. Thi
 ### Task Organization
 You can organize your tasks by grouping them into folders. This helps you easily find relevant tasks and manage them efficiently.
 
-### Time Entries Display Grouped by Days with Hourly Rate Calculation
+### Time Entries with Hourly Rate Calculation
 
 Timefall displays time entries grouped by days. You’ll see how much time was spent on each task, along with the calculated hourly payment.
 
