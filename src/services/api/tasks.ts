@@ -74,7 +74,7 @@ export const api: TaskApi = {
     const items = store.get('taskRecords') as TaskRecord[]
     const index = items.findIndex(i => i.id === id)
 
-    items[index].duration += duration
+    items[index].duration = duration
     items[index].updatedAt = new Date().getTime()
 
     store.set('taskRecords', items)
