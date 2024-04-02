@@ -8,6 +8,7 @@ const { api, store, tray } = window.electron
 const { selectedFolderId } = useFolders()
 
 let timer: NodeJS.Timeout
+let timerToUpdate: NodeJS.Timeout
 
 const tasks = shallowRef<TaskWithRecords[]>([])
 
@@ -59,13 +60,26 @@ function start(id: string) {
   currentTaskItemId.value = api.addTaskRecord({ taskId: id })
   lastTaskId.value = id
 
+  timerToUpdate = setInterval(
+    () => {
+      api.updateTaskRecordDuration(currentTaskItemId.value, sec.value)
+      // eslint-disable-next-line no-console
+      console.log('[Updated]:', currentTask.value.name, sec.value)
+    },
+    1000 * 60 * 5,
+  )
+
   isStarted.value = true
 }
 
 function stop() {
   clearInterval(timer)
+  clearInterval(timerToUpdate)
 
   api.updateTaskRecordDuration(currentTaskItemId.value, sec.value)
+  // eslint-disable-next-line no-console
+  console.log('[Total]:', currentTask.value.name, sec.value)
+
   getTasks()
 
   sec.value = 0
