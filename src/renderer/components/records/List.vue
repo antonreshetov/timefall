@@ -15,7 +15,8 @@ const {
   isOpenEditMenu,
   deleteTaskRecord,
 } = useRecords()
-const { stop, currentTaskItemId, selectedTaskId, selectedTask } = useTasks()
+const { stop, currentTaskItemId, selectedTaskId, selectedTask, getTasks }
+  = useTasks()
 const { selectedFolder } = useFolders()
 
 const isConfirmOpen = ref(false)
@@ -35,6 +36,8 @@ function onDelete() {
     stop()
 
   deleteTaskRecord(editRecordId.value)
+  getTasks()
+
   isConfirmOpen.value = false
 }
 

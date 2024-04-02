@@ -3,9 +3,11 @@ import { onBeforeUnmount, reactive, ref, watchEffect } from 'vue'
 import type { MaskaDetail } from 'maska'
 import { vMaska } from 'maska'
 import { useRecords } from '@/components/records/composables'
+import { useTasks } from '@/components/tasks/composables'
 import { timeFormat, timeToSec } from '@/utils'
 
 const { editRecord, getTaskRecords } = useRecords()
+const { getTasks } = useTasks()
 
 const { api } = window.electron
 
@@ -38,6 +40,7 @@ onBeforeUnmount(() => {
       duration: duration.value,
     })
     getTaskRecords()
+    getTasks()
   }
 
   if (description.value !== lastSavedDescription.value) {
@@ -45,6 +48,7 @@ onBeforeUnmount(() => {
       description: description.value,
     })
     getTaskRecords()
+    getTasks()
   }
 })
 </script>
