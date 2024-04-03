@@ -64,7 +64,7 @@ function start(id: string) {
     () => {
       api.updateTaskRecordDuration(currentTaskItemId.value, sec.value)
       // eslint-disable-next-line no-console
-      console.log('[Updated]:', currentTask.value.name, sec.value)
+      console.log('[Update]', currentTask.value.name, sec.value)
     },
     1000 * 60 * 5,
   )
@@ -78,7 +78,7 @@ function stop() {
 
   api.updateTaskRecordDuration(currentTaskItemId.value, sec.value)
   // eslint-disable-next-line no-console
-  console.log('[Total]:', currentTask.value.name, sec.value)
+  console.log('[Stop]', currentTask.value.name, sec.value)
 
   getTasks()
 
