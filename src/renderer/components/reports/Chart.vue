@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { ApexOptions } from 'apexcharts'
 import ApexCharts from 'apexcharts'
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { ChevronLeft, ChevronRight, Dot } from 'lucide-vue-next'
+import { differenceInDays, format } from 'date-fns'
 import { useReports } from '@/components/reports/composables'
 import { timeFormat } from '@/utils'
 
@@ -22,15 +23,36 @@ const {
 
 const chartRef = ref<HTMLElement>()
 
+const diffInDays = computed(() =>
+  Math.abs(differenceInDays(range.value.start, range.value.end)),
+)
+
 let chart: ApexCharts
 
-const options: ApexOptions = {
+function labelXFormatter(value: string) {
+  if (selectedRangeType.value === 'week')
+    return format(new Date(value), 'EEE')
+
+  if (selectedRangeType.value === 'month')
+    return format(new Date(value), 'dd')
+
+  if (selectedRangeType.value === 'year')
+    return format(new Date(value), 'MMM')
+
+  if (selectedRangeType.value === 'custom')
+    return format(new Date(value), 'MMM dd')
+}
+
+const options = {
   chart: {
     height: '100%',
     type: 'bar',
     stacked: true,
     toolbar: {
       show: false,
+    },
+    zoom: {
+      enabled: false,
     },
     animations: {
       enabled: false,
@@ -98,7 +120,11 @@ const options: ApexOptions = {
     },
   },
   xaxis: {
+    type: 'category',
     categories: xAxisLabels.value,
+    labels: {
+      formatter: labelXFormatter,
+    },
   },
   yaxis: {
     labels: {
@@ -114,47 +140,48 @@ function createChart() {
   chart.render()
 }
 
-watch(
-  range,
-  () => {
-    chart.updateOptions({
-      xaxis: {
-        categories: xAxisLabels.value,
-      },
-    })
-    chart.updateSeries(yAxis.value as [])
-  },
-  { deep: true },
-)
+function updateChart() {
+  let type: ApexOptions['xaxis']['type'] = 'category'
+  let fontSize = '12px'
 
-watch(selectedRangeType, (v) => {
+  if (selectedRangeType.value === 'custom' && diffInDays.value > 6)
+    type = 'datetime'
+
+  if (selectedRangeType.value === 'custom' && diffInDays.value > 14)
+    fontSize = '9px'
+
+  if (selectedRangeType.value === 'month')
+    fontSize = '9px'
+
   const options: ApexOptions = {
     dataLabels: {
-      enabled: v === 'week',
+      enabled: selectedRangeType.value === 'week' || diffInDays.value <= 6,
     },
     plotOptions: {
       bar: {
         dataLabels: {
           total: {
+            enabled:
+              selectedRangeType.value === 'year' || diffInDays.value < 30,
             style: {
-              fontSize: v === 'month' ? '9px' : '12px',
+              fontSize,
             },
           },
         },
       },
     },
+    xaxis: {
+      type,
+      categories: xAxisLabels.value,
+      labels: {
+        formatter: labelXFormatter,
+      },
+    },
   }
 
   chart.updateOptions(options)
-})
-
-onMounted(() => {
-  createChart()
-})
-
-onBeforeUnmount(() => {
-  chart.destroy()
-})
+  chart.updateSeries(yAxis.value as [])
+}
 
 function onPrev() {
   if (selectedRangeType.value === 'week')
@@ -188,15 +215,25 @@ function onReset() {
   if (selectedRangeType.value === 'year')
     setYearRange(new Date().getFullYear())
 }
+
+onMounted(() => {
+  createChart()
+})
+
+onBeforeUnmount(() => {
+  chart.destroy()
+})
+
+watch(range, updateChart, { deep: true })
 </script>
 
 <template>
   <div data-reports-chart>
     <div
       data-date-actions
-      class="h-[30px] flex items-center gap-2"
+      class="h-[30px] flex items-center gap-2 px-4"
     >
-      <div>
+      <div v-if="selectedRangeType !== 'custom'">
         <UiButton
           variant="ghost"
           @click="onPrev"
@@ -222,7 +259,7 @@ function onReset() {
     </div>
     <div
       ref="chartRef"
-      class="h-[calc(100vh-125px)]"
+      class="h-[calc(100vh-125px)] pl-1"
     />
   </div>
 </template>
