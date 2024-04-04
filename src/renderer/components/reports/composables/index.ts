@@ -19,7 +19,7 @@ const { api } = window.electron
 const tasks = shallowRef<TaskWithRecords[]>([])
 const taskRecords = shallowRef<TaskRecordWithInfo[]>([])
 
-type RangeType = 'week' | 'month' | 'year'
+type RangeType = 'week' | 'month' | 'year' | 'custom'
 type TotalType = 'rate' | 'duration'
 
 const selectedRangeType = ref<RangeType>('week')
@@ -83,6 +83,9 @@ const showRangeText = computed(() => {
 
   if (selectedRangeType.value === 'year')
     return `${format(range.value.start, 'yyyy')}`
+
+  if (selectedRangeType.value === 'custom')
+    return `${format(range.value.start, 'd MMMM yyyy')} - ${format(range.value.end, 'd MMMM yyyy')}`
 })
 
 const taskRecordsFilteredByRange = computed(() => {
@@ -167,6 +170,18 @@ const xAxis = computed(() => {
 
     return months
   }
+
+  if (selectedRangeType.value === 'custom') {
+    const days = []
+    let date = range.value.start
+
+    while (date <= range.value.end) {
+      days.push(date)
+      date = addDays(date, 1)
+    }
+
+    return days
+  }
 })
 
 // Серии данных по оси Y, группировка по id задачи и суммирование времени
@@ -222,20 +237,9 @@ const yAxis = computed(() => {
   return series
 })
 
-const xAxisLabels = computed(() => {
-  return xAxis.value.map((date) => {
-    if (selectedRangeType.value === 'week')
-      return format(date, 'EEEE')
-
-    if (selectedRangeType.value === 'month')
-      return format(date, 'd')
-
-    if (selectedRangeType.value === 'year')
-      return format(date, 'LLL')
-
-    return ''
-  })
-})
+const xAxisLabels = computed(() =>
+  xAxis.value.map(date => format(date, 'yyyy-MM-dd')),
+)
 
 export function useReports() {
   return {
