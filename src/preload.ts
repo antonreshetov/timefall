@@ -5,6 +5,7 @@ import { repository } from '../package.json'
 import { api } from './services/api'
 import { store } from './services/store'
 import type { AppStore } from './services/store/types'
+import { getTime, isTimerActive } from './timer'
 
 contextBridge.exposeInMainWorld('electron', {
   api,
@@ -17,11 +18,21 @@ contextBridge.exposeInMainWorld('electron', {
     },
   },
   tray: {
-    startTimer: () => ipcRenderer.send('tray-start-timer'),
-    stopTimer: () => ipcRenderer.send('tray-stop-timer'),
     setTime: (time: number) => ipcRenderer.send('tray-set-time', time),
-    onStart: (callback: () => void) => ipcRenderer.on('start', callback),
-    onStop: (callback: () => void) => ipcRenderer.on('stop', callback),
+    onStart: (callback: () => void) =>
+      ipcRenderer.on('tray-start-timer', callback),
+    onStop: (callback: () => void) =>
+      ipcRenderer.on('tray-stop-timer', callback),
+  },
+  timer: {
+    getTime: () => getTime(),
+    isTimerActive: () => isTimerActive(),
+    onStart: (callback: () => void) => ipcRenderer.on('start-timer', callback),
+    onStop: (callback: () => void) => ipcRenderer.on('stop-timer', callback),
+    onUpdate: (callback: (time: number) => void) =>
+      ipcRenderer.on('timer-update', (_, time) => callback(time)),
+    startTimer: () => ipcRenderer.send('start-timer'),
+    stopTimer: () => ipcRenderer.send('stop-timer'),
   },
   updates: {
     checkForUpdates: () => ipcRenderer.send('check-for-updates'),

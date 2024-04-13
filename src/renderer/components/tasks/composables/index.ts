@@ -3,12 +3,11 @@ import type { TaskWithRecords } from '~/services/api/types'
 import { timeFormat } from '@/utils'
 import { useFolders } from '@/components/folders/composables'
 
-const { api, store, tray } = window.electron
+const { api, store, timer } = window.electron
 
 const { selectedFolderId } = useFolders()
 
-let timer: NodeJS.Timeout
-let timerToUpdate: NodeJS.Timeout
+const INTERVAL_TO_UPDATE = 300 // 5 минут
 
 const tasks = shallowRef<TaskWithRecords[]>([])
 
@@ -52,30 +51,14 @@ function start(id: string) {
   if (currentTaskItemId.value)
     stop()
 
-  timer = setInterval(() => {
-    sec.value++
-  }, 1000)
-
   currentTaskId.value = id
   currentTaskItemId.value = api.addTaskRecord({ taskId: id })
   lastTaskId.value = id
-
-  timerToUpdate = setInterval(
-    () => {
-      api.updateTaskRecordDuration(currentTaskItemId.value, sec.value)
-      // eslint-disable-next-line no-console
-      console.log('[Update]', currentTask.value.name, sec.value)
-    },
-    1000 * 60 * 5,
-  )
 
   isStarted.value = true
 }
 
 function stop() {
-  clearInterval(timer)
-  clearInterval(timerToUpdate)
-
   api.updateTaskRecordDuration(currentTaskItemId.value, sec.value)
   // eslint-disable-next-line no-console
   console.log('[Stop]', currentTask.value.name, sec.value)
@@ -94,11 +77,11 @@ function startStop(id: string) {
 
   if (!isStarted.value) {
     start(id)
-    tray.startTimer()
+    timer.startTimer()
   }
   else {
     stop()
-    tray.stopTimer()
+    timer.stopTimer()
   }
 }
 
@@ -123,6 +106,16 @@ function deleteTask(id: string) {
 
 watch(lastTaskId, (id) => {
   store.app.set('lastTaskId', id)
+})
+
+timer.onUpdate((i) => {
+  sec.value = i
+
+  if (i % INTERVAL_TO_UPDATE === 0) {
+    api.updateTaskRecordDuration(currentTaskItemId.value, sec.value)
+    // eslint-disable-next-line no-console
+    console.log('[Update]', currentTask.value.name, sec.value)
+  }
 })
 
 export function useTasks() {

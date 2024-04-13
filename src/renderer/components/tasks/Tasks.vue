@@ -11,7 +11,7 @@ import { APP_DEFAULTS } from '~/services/store/constants'
 import * as ContextMenu from '@/components/ui/shadcn/context-menu'
 import * as Dialog from '@/components/ui/shadcn/dialog'
 
-const { store, tray } = window.electron
+const { store, timer } = window.electron
 
 const {
   getTasks,
@@ -83,7 +83,7 @@ function onAddTask() {
 function onDelete() {
   if (editTaskId.value === currentTaskId.value) {
     stop()
-    tray.stopTimer()
+    timer.stopTimer()
   }
 
   isConfirmOpen.value = false
