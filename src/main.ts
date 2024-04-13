@@ -14,15 +14,12 @@ import { store } from './services/store'
 import { timeFormat } from './renderer/utils'
 import { menu } from './menu'
 import { checkForUpdates } from './services/updates'
+import { getTime, isTimerActive, startTimer, stopTimer } from './timer'
 
 const isDev = process.env.NODE_ENV === 'development'
 
 let mainWindow: BrowserWindow
 let tray: Tray
-let timer: NodeJS.Timeout
-let sec = 0
-
-let isTimerActive = false
 let isQuitting = false
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -77,11 +74,11 @@ function createWindow() {
 function createTrayMenu() {
   return Menu.buildFromTemplate([
     {
-      label: isTimerActive ? 'Stop' : 'Start',
+      label: isTimerActive() ? 'Stop' : 'Start',
       click: () =>
-        isTimerActive
-          ? mainWindow.webContents.send('stop')
-          : mainWindow.webContents.send('start'),
+        isTimerActive()
+          ? mainWindow.webContents.send('tray-stop-timer')
+          : mainWindow.webContents.send('tray-start-timer'),
     },
     {
       type: 'separator',
@@ -126,36 +123,43 @@ app.on('activate', () => {
 })
 
 if (process.platform === 'darwin') {
-  ipcMain.on('tray-start-timer', () => {
-    isTimerActive = true
-
-    tray.setContextMenu(createTrayMenu())
-
-    timer = setInterval(() => {
-      sec++
-
-      tray.setTitle(timeFormat(sec), {
-        fontType: 'monospacedDigit',
-      })
-    }, 1000)
-  })
-
-  ipcMain.on('tray-stop-timer', () => {
-    clearInterval(timer)
-
-    sec = 0
-    isTimerActive = false
-
-    tray.setTitle('00:00:00')
-    tray.setContextMenu(createTrayMenu())
-  })
-
   app.setAboutPanelOptions({
     applicationName: app.name,
     applicationVersion: app.getVersion(),
     copyright: `${author.name} ©2024-${new Date().getFullYear()}`,
   })
 }
+
+ipcMain.on('start-timer', () => {
+  if (process.platform === 'darwin') {
+    startTimer(() => {
+      tray.setTitle(timeFormat(getTime()), {
+        fontType: 'monospacedDigit',
+      })
+
+      mainWindow.webContents.send('timer-update', getTime())
+    })
+
+    tray.setContextMenu(createTrayMenu())
+  }
+  else {
+    startTimer()
+  }
+  mainWindow.webContents.send('start-timer')
+})
+
+ipcMain.on('stop-timer', () => {
+  if (process.platform === 'darwin') {
+    stopTimer()
+
+    tray.setTitle('00:00:00')
+    tray.setContextMenu(createTrayMenu())
+  }
+  else {
+    stopTimer()
+  }
+  mainWindow.webContents.send('stop-timer')
+})
 
 ipcMain.on('check-for-updates', () => {
   checkForUpdates()

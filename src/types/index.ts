@@ -7,11 +7,17 @@ declare global {
       api: Api
       store: Store
       tray: {
-        startTimer: () => void
-        stopTimer: () => void
-        setTime: (time: number) => void
         onStart: (callback: () => void) => void
         onStop: (callback: () => void) => void
+      }
+      timer: {
+        getTime: () => number
+        isTimerActive: () => boolean
+        onStart: (callback: () => void) => void
+        onStop: (callback: () => void) => void
+        onUpdate: (callback: (time: number) => void) => void
+        startTimer: () => void
+        stopTimer: () => void
       }
       updates: {
         checkForUpdates: () => void
