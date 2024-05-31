@@ -62,7 +62,7 @@ You can analyze your productivity by viewing reports for different time periods.
 ### Privacy
 Timefall uses a simple JSON-based database stored locally on your computer, rather than in the cloud.
 
-## Who is Timefall Useful for? 
+## Who is Timefall Useful for?
 
 ### Freelancers and Self-Employed Professionals
 Freelancers working on various projects can utilize Timefall to track their billable hours accurately. Whether you’re a freelance writer, designer, developer, or consultant, this app helps you manage your time and calculate earnings.
@@ -82,6 +82,18 @@ Project managers can monitor team productivity by analyzing time entries. Timefa
 ### Personal Time Management
 Anyone seeking better time management — whether for personal tasks, side projects, or hobbies — can leverage Timefall. It’s a versatile tool for staying organized and productive.
 
+## Installation
+
+App are available for Windows & macOS. You can download the latest version from the [Releases](https://github.com/antonreshetov/timefall/releases).
+
+### macOS
+
+If you encounter the error message `"Timefall" is damaged and can't be opened. You should move it to the Trash` while installing software on macOS, it may be due to security settings restrictions in macOS. To solve this problem, please try the following command in Terminal:
+
+```bash
+sudo xattr -r -d com.apple.quarantine /Applications/Timefall.app
+```
+
 ## Development
 
 ### Prerequisites
@@ -96,15 +108,12 @@ bun install
 bun run dev
 ```
 
-## Build
-
-
+### Build
 
 ```
 # Build the app
 bun run make
 ```
-
 
 ## Follow
  - News and updates on [Twitter](https://twitter.com/anton_reshetov).
